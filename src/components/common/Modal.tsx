@@ -1,8 +1,15 @@
+'use client';
 import { Fragment, useRef } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
-import { XCircleIcon } from '@heroicons/react/solid';
+import { XCircleIcon } from '@heroicons/react/24/solid';
 
-export default function Modal({ open, setOpen, children }) {
+interface IProps {
+  open: boolean;
+  setOpen: (str: boolean) => void;
+  children: React.ReactNode;
+}
+
+export default function Modal({ open, setOpen, children }: IProps) {
   const cancelButtonRef = useRef(null);
   return (
     <Transition.Root show={open} as={Fragment}>

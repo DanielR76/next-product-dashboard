@@ -1,5 +1,7 @@
 import Header from 'components/Header';
 import Nav from 'components/common/Nav';
+
+import { ProviderAuth } from 'hooks/useAuth';
 import '../styles/global.css';
 
 export const metadata = {
@@ -15,11 +17,13 @@ export default function RootLayout({ children }: IProps) {
   return (
     <html lang="en">
       <body>
-        <div className="min-h-full">
-          <Header />
-          <Nav />
-          <main className="max-w-7xl mx-auto py-6 sm:px-6 xl:px-8">{children}</main>
-        </div>
+        <ProviderAuth>
+          <div className="min-h-full">
+            <Header />
+            <Nav />
+            <main className="max-w-7xl mx-auto py-6 sm:px-6 xl:px-8">{children}</main>
+          </div>
+        </ProviderAuth>
       </body>
     </html>
   );

@@ -1,3 +1,5 @@
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
 import Header from 'components/Header';
 import Nav from 'components/common/Nav';
 
@@ -14,16 +16,19 @@ interface IProps {
 }
 
 export default function RootLayout({ children }: IProps) {
+  const queryClient = new QueryClient();
   return (
     <html lang="en">
       <body>
-        <ProviderAuth>
-          <div className="min-h-full">
-            <Header />
-            <Nav />
-            <main className="max-w-7xl mx-auto py-6 sm:px-6 xl:px-8">{children}</main>
-          </div>
-        </ProviderAuth>
+        <QueryClientProvider client={queryClient}>
+          <ProviderAuth>
+            <div className="min-h-full">
+              <Header />
+              <Nav />
+              <main className="max-w-7xl mx-auto py-6 sm:px-6 xl:px-8">{children}</main>
+            </div>
+          </ProviderAuth>
+        </QueryClientProvider>
       </body>
     </html>
   );

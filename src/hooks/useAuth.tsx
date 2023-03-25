@@ -1,5 +1,7 @@
 'use client';
 import { useState, createContext, useContext, FC } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import Cookies from 'js-cookie';
 
 import { axiosInstance, endpoints } from 'app/api/services';
 
@@ -39,8 +41,7 @@ export const useProviderAuth = () => {
       const {
         data: { access_token },
       } = await axiosInstance.post(endpoints.auth.login, data);
-      console.log(access_token);
-      // setUser(result);
+      if (access_token) Cookies.set('token', access_token);
     } catch (e) {
       console.log('error', e);
     }

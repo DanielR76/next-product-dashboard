@@ -12,8 +12,8 @@ export default function LoginPage() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    signIn(emailRef?.current?.value, passRef?.current?.value);
+    const data = { email: emailRef?.current?.value, password: passRef?.current?.value };
+    signIn(data);
   };
 
   return (

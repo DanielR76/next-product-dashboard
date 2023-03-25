@@ -1,9 +1,8 @@
 'use client';
 import { useState, createContext, useContext, FC } from 'react';
-import { useQuery } from '@tanstack/react-query';
 import Cookies from 'js-cookie';
 
-import { axiosInstance, endpoints } from 'app/api/services';
+import { axiosInstance, endpoints } from 'services';
 
 interface IArg {
   email: string;
@@ -15,10 +14,6 @@ interface IPropsContext {
   signIn: ({ email, password }: IArg) => void;
 }
 
-interface IPropsProvider {
-  children: React.ReactNode;
-}
-
 const initValue = {
   user: '',
   signIn: () => {},
@@ -26,7 +21,7 @@ const initValue = {
 
 const AuthContext = createContext<IPropsContext>(initValue);
 
-export const ProviderAuth: FC<IPropsProvider> = ({ children }) => {
+export const ProviderAuth: FC<IChildrenProps> = ({ children }) => {
   const user = useProviderAuth();
   return <AuthContext.Provider value={user}>{children}</AuthContext.Provider>;
 };

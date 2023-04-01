@@ -5,7 +5,7 @@ import { LockClosedIcon } from '@heroicons/react/24/solid';
 import { useAuth } from 'hooks/useAuth';
 
 export default function LoginPage() {
-  const { user, signIn } = useAuth();
+  const { mutate } = useAuth();
 
   const emailRef = useRef<HTMLInputElement>(null);
   const passRef = useRef<HTMLInputElement>(null);
@@ -13,7 +13,7 @@ export default function LoginPage() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data = { email: emailRef?.current?.value, password: passRef?.current?.value };
-    signIn(data);
+    mutate(data);
   };
 
   return (

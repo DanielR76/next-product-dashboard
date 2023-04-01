@@ -10,17 +10,17 @@ const userData = {
   imageUrl: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
 };
 const navigation = [
-  { name: 'Dashboard', href: '#', current: true },
-  { name: 'Productos', href: '/dashboard/products/', current: false },
-  { name: 'Ventas', href: '#', current: false },
+  { name: 'Dashboard', href: '/dashboard', current: true },
+  { name: 'Productos', href: '/', current: false },
+  { name: 'Ventas', href: '/', current: false },
 ];
 const userNavigation = [
-  { name: 'Your Profile', href: '#' },
-  { name: 'Settings', href: '#' },
-  { name: 'Sign out', href: '#' },
+  { name: 'Your Profile', href: '/' },
+  { name: 'Settings', href: '/' },
+  { name: 'Sign out', href: '/' },
 ];
 
-function classNames(...classes) {
+function classNames(...classes: any[]) {
   return classes.filter(Boolean).join(' ');
 }
 
@@ -68,6 +68,7 @@ export default function Header() {
                           <img className="h-8 w-8 rounded-full" src={userData.imageUrl} alt="" />
                         </Menu.Button>
                       </div>
+
                       <Transition
                         as={Fragment}
                         enter="transition ease-out duration-100"
@@ -93,7 +94,6 @@ export default function Header() {
                   </div>
                 </div>
                 <div className="-mr-2 flex md:hidden">
-                  {/* Mobile menu button */}
                   <Disclosure.Button className="bg-gray-800 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                     <span className="sr-only">Open main menu</span>
                     {open ? <XMarkIcon className="block h-6 w-6" aria-hidden="true" /> : <Bars3Icon className="block h-6 w-6" aria-hidden="true" />}
@@ -116,15 +116,18 @@ export default function Header() {
                   </Disclosure.Button>
                 ))}
               </div>
+
               <div className="pt-4 pb-3 border-t border-gray-700">
                 <div className="flex items-center px-5">
                   <div className="flex-shrink-0">
                     <img className="h-10 w-10 rounded-full" src={userData.imageUrl} alt="" />
                   </div>
+
                   <div className="ml-3">
                     <div className="text-base font-medium leading-none text-white">{userData.name}</div>
                     <div className="text-sm font-medium leading-none text-gray-400">{userData.email}</div>
                   </div>
+
                   <button
                     type="button"
                     className="ml-auto bg-gray-800 flex-shrink-0 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
@@ -133,6 +136,7 @@ export default function Header() {
                     <BellIcon className="h-6 w-6" aria-hidden="true" />
                   </button>
                 </div>
+
                 <div className="mt-3 px-2 space-y-1">
                   {userNavigation.map((item) => (
                     <Disclosure.Button key={item.name} as="a" href={item.href} className="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700">

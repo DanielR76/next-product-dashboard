@@ -1,7 +1,7 @@
 'use client';
-import { useState, createContext, useContext, FC } from 'react';
+import { createContext, useContext, FC } from 'react';
 import Cookies from 'js-cookie';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, UseMutationResult } from '@tanstack/react-query';
 
 import { axiosInstance, endpoints } from 'services';
 
@@ -10,7 +10,7 @@ interface IArg {
   password: string;
 }
 
-const AuthContext = createContext({});
+const AuthContext = createContext<UseMutationResult<IArg>>({});
 
 export const ProviderAuth: FC<IChildrenProps> = ({ children }) => {
   const auth = useProviderAuth();
@@ -20,18 +20,16 @@ export const ProviderAuth: FC<IChildrenProps> = ({ children }) => {
 export const useAuth = () => useContext(AuthContext);
 
 const signIn = async (dataAuth: IArg) => {
-  try {
-    const {
-      data: { access_token },
-    } = await axiosInstance.post(endpoints.auth.login, dataAuth);
-    if (access_token) Cookies.set('token', access_token);
-  } catch (e) {
-    console.log('error', e);
-  }
+  const {
+    data: { access_token },
+  } = await axiosInstance.post(endpoints.auth.login, dataAuth);
+  if (access_token) Cookies.set('token', access_token);
 };
 
 export const useProviderAuth = () => {
-  const query = useMutation({ mutationFn: (dataAuth: IArg) => signIn(dataAuth) });
+  const query = useMutation({
+    mutationFn: (dataAuth: IArg) => signIn(dataAuth),
+  });
 
   return query;
 };

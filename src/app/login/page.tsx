@@ -6,10 +6,12 @@ import { LockClosedIcon } from '@heroicons/react/24/solid';
 import { useAuth } from 'hooks/useAuth';
 
 export default function LoginPage() {
-  const { mutate } = useAuth();
+  const { error, mutate, isLoading } = useAuth();
 
   const emailRef = useRef<HTMLInputElement>(null);
   const passRef = useRef<HTMLInputElement>(null);
+
+  const isInvalid = error?.response?.status === 401;
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -26,7 +28,13 @@ export default function LoginPage() {
             <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Sign in to your account</h2>
           </div>
 
-          <form className="mt-8 space-y-6" action="#" method="POST" onSubmit={handleSubmit}>
+          {isInvalid && (
+            <section className="mt-4 text-red-600">
+              <span>Invalid email or password</span>
+            </section>
+          )}
+
+          <form className="mt-4 space-y-6" action="#" method="POST" onSubmit={handleSubmit}>
             <input type="hidden" name="remember" defaultValue="true" />
 
             <div className="rounded-md shadow-sm -space-y-px">
@@ -40,6 +48,7 @@ export default function LoginPage() {
                   name="email"
                   type="email"
                   ref={emailRef}
+                  disabled={isLoading}
                   autoComplete="email"
                   required
                   className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
@@ -56,6 +65,7 @@ export default function LoginPage() {
                   name="password"
                   type="password"
                   ref={passRef}
+                  disabled={isLoading}
                   autoComplete="current-password"
                   required
                   className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
@@ -82,6 +92,7 @@ export default function LoginPage() {
 
             <div>
               <button
+                disabled={isLoading}
                 type="submit"
                 className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >

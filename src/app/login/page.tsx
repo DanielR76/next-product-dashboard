@@ -3,7 +3,7 @@ import { useRef } from 'react';
 import Link from 'next/link';
 import { LockClosedIcon } from '@heroicons/react/24/solid';
 
-import { useAuth } from 'hooks/useAuth';
+import { useAuth } from 'hooks';
 
 export default function LoginPage() {
   const { error, mutate, isLoading } = useAuth();

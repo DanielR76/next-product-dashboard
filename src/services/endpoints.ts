@@ -9,7 +9,7 @@ export const endpoints = {
     userAvailable: `/users/is-available`,
   },
   products: {
-    getListOfProducts: `/products`,
+    getListOfProducts: (limit: number, offset: number) => `/products?limit=${limit}&offset=${offset}`,
     postProduct: `/products`,
     getProductById: (id: string) => `/products/${id}`,
     putProductById: (id: string) => `/products/${id}`,

@@ -20,9 +20,9 @@ export default function Header() {
     { name: 'Sign out', href: '/' },
   ];
 
-  function classNames(...classes: any[]) {
+  const classNames = (...classes: any[]) => {
     return classes.filter(Boolean).join(' ');
-  }
+  };
 
   return (
     <>

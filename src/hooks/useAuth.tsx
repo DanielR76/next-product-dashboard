@@ -10,7 +10,18 @@ interface IArg {
   password: string;
 }
 
-const AuthContext = createContext<UseMutationResult<IArg>>({});
+interface IResponse {
+  id: number;
+  role: string;
+  creationAt: string;
+  avatar: string;
+  email: string;
+  name: string;
+  password: string;
+  updatedAt: string;
+}
+
+const AuthContext = createContext<UseMutationResult<IResponse>>({});
 
 export const ProviderAuth: FC<IChildrenProps> = ({ children }) => {
   const auth = useProviderAuth();

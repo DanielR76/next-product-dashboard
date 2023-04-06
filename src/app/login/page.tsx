@@ -55,6 +55,7 @@ export default function LoginPage() {
                   placeholder="Email address"
                 />
               </div>
+
               <div>
                 <label htmlFor="password" className="sr-only">
                   Password

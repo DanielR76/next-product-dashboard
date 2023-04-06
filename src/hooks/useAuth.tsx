@@ -23,7 +23,12 @@ const signIn = async (dataAuth: IArg) => {
   const {
     data: { access_token },
   } = await axiosInstance.post(endpoints.auth.login, dataAuth);
-  if (access_token) Cookies.set('token', access_token);
+  if (access_token) {
+    Cookies.set('token', access_token);
+    axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${access_token}`;
+    const { data } = await axiosInstance.get(endpoints.auth.profile);
+    return data;
+  }
 };
 
 export const useProviderAuth = () => {

@@ -16,5 +16,5 @@ export const endpoints = {
     removeProductById: (id: string) => `/products/{id}`,
   },
   categories: { getListOfCategories: `/categories`, getCategoryById: (id: string) => `/categories/${id}` },
-  fies: { getFile: (filename: string) => `/files/${filename}`, postFile: `/files/upload` },
+  files: { getFile: (filename: string) => `/files/${filename}`, postFile: `/files/upload` },
 };

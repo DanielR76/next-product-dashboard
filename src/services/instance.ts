@@ -7,3 +7,13 @@ export const axiosInstance = axios.create({
     'Content-Type': 'application/json',
   },
 });
+
+export const getData = async (url: string): Promise<any> => {
+  const response = await axiosInstance.get(url);
+  return response.data;
+};
+
+export const setData = async <T>(url: string, data: T): Promise<any> => {
+  const response = await axiosInstance.post(url, data);
+  return response.data;
+};

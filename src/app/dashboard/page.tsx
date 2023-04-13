@@ -1,11 +1,11 @@
 'use client';
 import Link from 'next/link';
 
-import { useFetch } from 'hooks';
 import { endpoints } from 'services';
+import { useGetData } from 'hooks';
 
 export default function Dashboard() {
-  const { data: products } = useFetch(endpoints.products.getListOfProducts(5, 5));
+  const { data: products } = useGetData({ queryKey: ['list-products'], queryFn: endpoints.products.getListOfProducts(5, 5) });
 
   return (
     <>
@@ -38,12 +38,12 @@ export default function Dashboard() {
                 </thead>
 
                 <tbody className="bg-white divide-y divide-gray-200">
-                  {products.map((product) => (
+                  {products?.map((product: any) => (
                     <tr key={product.email}>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="flex items-center">
                           <div className="flex-shrink-0 h-10 w-10">
-                            <img className="h-10 w-10 rounded-full" src={product?.images?.[0]} alt="" />
+                            <img className="h-10 w-10 rounded-full" src={product?.images?.[0]} alt="image-avatar" />
                           </div>
 
                           <div className="ml-4">

@@ -3,14 +3,14 @@
 import Link from 'next/link';
 import { Bars3Icon } from '@heroicons/react/24/outline';
 
-const navigation = [
-  { name: 'Product', href: '#' },
-  { name: 'Features', href: '#' },
-  { name: 'Marketplace', href: '#' },
-  { name: 'Company', href: '#' },
-];
-
 export default function Home() {
+  const navigation = [
+    { name: 'Product', href: '#' },
+    { name: 'Features', href: '#' },
+    { name: 'Marketplace', href: '#' },
+    { name: 'Company', href: '#' },
+  ];
+
   return (
     <div className="isolate bg-white">
       <div className="px-6 pt-6 lg:px-8">

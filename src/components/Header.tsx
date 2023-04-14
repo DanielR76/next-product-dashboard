@@ -1,4 +1,5 @@
 'use client';
+
 import { Fragment } from 'react';
 import Link from 'next/link';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
@@ -7,13 +8,16 @@ import { BellIcon, Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { useAuth } from 'hooks/useAuth';
 
 export default function Header() {
-  const { data } = useAuth();
+  const {
+    authData: { data },
+  } = useAuth();
 
   const navigation = [
     { name: 'Dashboard', href: '/dashboard', current: true },
     { name: 'Productos', href: '/', current: false },
     { name: 'Ventas', href: '/', current: false },
   ];
+
   const userNavigation = [
     { name: 'Your Profile', href: '/' },
     { name: 'Settings', href: '/' },
@@ -23,6 +27,8 @@ export default function Header() {
   const classNames = (...classes: any[]) => {
     return classes.filter(Boolean).join(' ');
   };
+
+  if (!data) return null;
 
   return (
     <>

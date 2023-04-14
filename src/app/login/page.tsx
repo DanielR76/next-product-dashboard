@@ -1,22 +1,33 @@
 'use client';
+
 import { useRef } from 'react';
 import Link from 'next/link';
 import { LockClosedIcon } from '@heroicons/react/24/solid';
 
-import { useAuth } from 'hooks';
+import { useAuth, usePostData } from 'hooks';
+import { endpoints } from 'services';
 
 export default function LoginPage() {
-  const { error, mutate, isLoading } = useAuth();
+  const { handleToken } = useAuth();
 
   const emailRef = useRef<HTMLInputElement>(null);
   const passRef = useRef<HTMLInputElement>(null);
 
-  const isInvalid = error?.response?.status === 401;
+  const authLogin = usePostData({
+    url: endpoints.auth.login,
+    onSuccess: ({ access_token }) => {
+      if (access_token) {
+        handleToken(access_token);
+      }
+    },
+  });
+
+  const isInvalid = authLogin.error?.response?.status === 401;
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data = { email: emailRef?.current?.value, password: passRef?.current?.value };
-    mutate(data);
+    authLogin.mutate(data);
   };
 
   return (
@@ -48,7 +59,7 @@ export default function LoginPage() {
                   name="email"
                   type="email"
                   ref={emailRef}
-                  disabled={isLoading}
+                  disabled={authLogin.isLoading}
                   autoComplete="email"
                   required
                   className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
@@ -66,7 +77,7 @@ export default function LoginPage() {
                   name="password"
                   type="password"
                   ref={passRef}
-                  disabled={isLoading}
+                  disabled={authLogin.isLoading}
                   autoComplete="current-password"
                   required
                   className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
@@ -93,7 +104,7 @@ export default function LoginPage() {
 
             <div>
               <button
-                disabled={isLoading}
+                disabled={authLogin.isLoading}
                 type="submit"
                 className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >

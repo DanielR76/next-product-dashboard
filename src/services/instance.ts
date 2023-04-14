@@ -13,7 +13,7 @@ export const getData = async (url: string): Promise<any> => {
   return response.data;
 };
 
-export const setData = async <T>(url: string, data: T): Promise<any> => {
+export const setData = async <T>(url: string, data?: T): Promise<any> => {
   const response = await axiosInstance.post(url, data);
   return response.data;
 };

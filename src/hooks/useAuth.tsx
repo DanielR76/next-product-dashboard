@@ -1,13 +1,15 @@
 'use client';
-import { createContext, useContext, FC } from 'react';
+
+import { createContext, useContext, FC, useState } from 'react';
 import Cookies from 'js-cookie';
-import { useMutation, UseMutationResult } from '@tanstack/react-query';
+import { UseQueryResult } from '@tanstack/react-query';
 
 import { axiosInstance, endpoints } from 'services';
+import { useGetData } from './useFetchData';
 
 interface IArg {
-  email: string;
-  password: string;
+  authData: UseQueryResult<IResponse>;
+  handleToken: (arg: string) => void;
 }
 
 interface IResponse {
@@ -21,31 +23,26 @@ interface IResponse {
   updatedAt: string;
 }
 
-const AuthContext = createContext<UseMutationResult<IResponse>>({});
+const AuthContext = createContext<IArg>({});
 
 export const ProviderAuth: FC<IChildrenProps> = ({ children }) => {
   const auth = useProviderAuth();
+
   return <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>;
 };
 
 export const useAuth = () => useContext(AuthContext);
 
-const signIn = async (dataAuth: IArg) => {
-  const {
-    data: { access_token },
-  } = await axiosInstance.post(endpoints.auth.login, dataAuth);
-  if (access_token) {
-    Cookies.set('token', access_token);
-    axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${access_token}`;
-    const { data } = await axiosInstance.get(endpoints.auth.profile);
-    return data;
-  }
-};
-
 export const useProviderAuth = () => {
-  const query = useMutation({
-    mutationFn: (dataAuth: IArg) => signIn(dataAuth),
-  });
+  const [token, setToken] = useState('');
 
-  return query;
+  const authData = useGetData({ queryKey: ['profile'], url: endpoints.auth.profile, enabled: Boolean(token) });
+
+  const handleToken = (token: string) => {
+    Cookies.set('token', token);
+    axiosInstance.defaults.headers.common.Authorization = `Bearer ${token}`;
+    setToken(token);
+  };
+
+  return { authData, handleToken };
 };

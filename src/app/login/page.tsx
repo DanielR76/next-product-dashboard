@@ -3,12 +3,14 @@
 import { useRef } from 'react';
 import Link from 'next/link';
 import { LockClosedIcon } from '@heroicons/react/24/solid';
+import { useRouter } from 'next/navigation';
 
 import { useAuth, usePostData } from 'hooks';
 import { endpoints } from 'services';
 
 export default function LoginPage() {
-  const { handleToken } = useAuth();
+  const router = useRouter();
+  const { handleToken, authData } = useAuth();
 
   const emailRef = useRef<HTMLInputElement>(null);
   const passRef = useRef<HTMLInputElement>(null);
@@ -29,6 +31,10 @@ export default function LoginPage() {
     const data = { email: emailRef?.current?.value, password: passRef?.current?.value };
     authLogin.mutate(data);
   };
+
+  if (authData.data) {
+    router.push('/');
+  }
 
   return (
     <>

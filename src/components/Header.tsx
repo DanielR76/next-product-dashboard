@@ -14,8 +14,7 @@ export default function Header() {
 
   const navigation = [
     { name: 'Dashboard', href: '/dashboard', current: true },
-    { name: 'Productos', href: '/', current: false },
-    { name: 'Ventas', href: '/', current: false },
+    { name: 'Products', href: '/', current: false },
   ];
 
   const userNavigation = [

@@ -3,14 +3,15 @@
 import Link from 'next/link';
 import { Bars3Icon } from '@heroicons/react/24/outline';
 
-export default function Home() {
-  const navigation = [
-    { name: 'Product', href: '#' },
-    { name: 'Features', href: '#' },
-    { name: 'Marketplace', href: '#' },
-    { name: 'Company', href: '#' },
-  ];
+import { useAuth } from 'hooks';
 
+export default function Home() {
+  const { authData } = useAuth();
+  const navigation = [
+    { name: 'Dashboard', href: '/dashboard' },
+    { name: 'Product', href: '/' },
+  ];
+  console.log(authData.data);
   return (
     <div className="isolate bg-white">
       <div className="px-6 pt-6 lg:px-8">
@@ -28,11 +29,14 @@ export default function Home() {
               </Link>
             ))}
           </div>
-          <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-            <Link href="/login" className="text-sm font-semibold leading-6 text-gray-900">
-              Log in <span aria-hidden="true">&rarr;</span>
-            </Link>
-          </div>
+
+          {!authData.data && (
+            <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+              <Link href="/login" className="text-sm font-semibold leading-6 text-gray-900">
+                Log in <span aria-hidden="true">&rarr;</span>
+              </Link>
+            </div>
+          )}
         </nav>
       </div>
 

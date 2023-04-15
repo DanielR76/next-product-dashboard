@@ -17,8 +17,20 @@ interface IPropsMutation /* extends Parameters<typeof useMutation> */ {
   onError?: (arg: any) => void;
 }
 
-export const useGetData = ({ queryKey, url, enabled = true, refetchOnWindowFocus = false, ...props }: IPropsQuery) => {
-  return useQuery({ queryKey, queryFn: () => getData(url), enabled, refetchOnWindowFocus, ...props });
+export const useGetData = ({
+  queryKey,
+  url,
+  enabled = true,
+  refetchOnWindowFocus = false,
+  ...props
+}: IPropsQuery) => {
+  return useQuery({
+    queryKey,
+    queryFn: () => getData(url),
+    enabled,
+    refetchOnWindowFocus,
+    ...props,
+  });
 };
 
 export const usePostData = ({ url, onSuccess, onError, ...props }: IPropsMutation) => {

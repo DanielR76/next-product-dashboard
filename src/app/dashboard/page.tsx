@@ -5,8 +5,11 @@ import Link from 'next/link';
 import { endpoints } from 'services';
 import { useGetData } from 'hooks';
 
+const PRD_LIMIT = 5;
+const PRD_OFFSET = 5;
+
 export default function Dashboard() {
-  const { data: products, isFetching, isLoading } = useGetData({ queryKey: ['list-products'], url: endpoints.products.getListOfProducts(5, 5) });
+  const { data: products, isFetching, isLoading } = useGetData({ queryKey: ['list-products'], url: endpoints.products.getListOfProducts(PRD_LIMIT, PRD_OFFSET) });
 
   if (isFetching || isLoading) return <span>Loading...</span>;
 

@@ -7,11 +7,12 @@ import { useAuth } from 'hooks';
 
 export default function Home() {
   const { authData } = useAuth();
+
   const navigation = [
     { name: 'Dashboard', href: '/dashboard' },
     { name: 'Product', href: '/' },
   ];
-  console.log(authData.data);
+
   return (
     <div className="isolate bg-white">
       <div className="px-6 pt-6 lg:px-8">

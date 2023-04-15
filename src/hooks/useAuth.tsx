@@ -31,8 +31,6 @@ export const ProviderAuth: FC<IChildrenProps> = ({ children }) => {
   return <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>;
 };
 
-export const useAuth = () => useContext(AuthContext);
-
 export const useProviderAuth = () => {
   const [token, setToken] = useState('');
 
@@ -46,3 +44,5 @@ export const useProviderAuth = () => {
 
   return { authData, handleToken };
 };
+
+export const useAuth = () => useContext(AuthContext);

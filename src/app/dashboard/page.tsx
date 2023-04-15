@@ -6,7 +6,9 @@ import { endpoints } from 'services';
 import { useGetData } from 'hooks';
 
 export default function Dashboard() {
-  const { data: products } = useGetData({ queryKey: 'list-products', url: endpoints.products.getListOfProducts(5, 5) });
+  const { data: products, isFetching, isLoading } = useGetData({ queryKey: ['list-products'], url: endpoints.products.getListOfProducts(5, 5) });
+
+  if (isFetching || isLoading) return <span>Loading...</span>;
 
   return (
     <>

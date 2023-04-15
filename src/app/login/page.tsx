@@ -22,7 +22,7 @@ export default function LoginPage() {
     },
   });
 
-  const isInvalid = authLogin.error?.response?.status === 401;
+  const isInvalidUser = authLogin.error?.response?.status === 401;
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -39,9 +39,15 @@ export default function LoginPage() {
             <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Sign in to your account</h2>
           </div>
 
-          {isInvalid && (
+          {isInvalidUser && (
             <section className="mt-4 text-red-600">
               <span>Invalid email or password</span>
+            </section>
+          )}
+
+          {authLogin.isError && !isInvalidUser && (
+            <section className="mt-4 text-red-600">
+              <span>An error has ocurred</span>
             </section>
           )}
 

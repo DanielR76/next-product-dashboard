@@ -3,7 +3,7 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { getData, setData } from 'services';
 
 interface IPropsQuery /* extends Parameters<typeof useQuery> */ {
-  queryKey: string | string[];
+  queryKey: string[];
   url: string;
   enabled?: boolean;
   refetchOnWindowFocus?: boolean;

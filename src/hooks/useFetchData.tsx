@@ -2,7 +2,7 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { getData, setData } from 'services';
 
-interface IPropsQuery /* extends Parameters<typeof useQuery> */ {
+interface Query /* extends ReturnType<typeof useQuery> */ {
   queryKey: string[];
   url: string;
   enabled?: boolean;
@@ -11,7 +11,7 @@ interface IPropsQuery /* extends Parameters<typeof useQuery> */ {
   onError?: (arg: any) => any;
 }
 
-interface IPropsMutation /* extends Parameters<typeof useMutation> */ {
+interface Mutation /* extends Parameters<typeof useMutation> */ {
   url: string;
   onSuccess?: (arg: any) => void;
   onError?: (arg: any) => void;
@@ -23,7 +23,7 @@ export const useGetData = ({
   enabled = true,
   refetchOnWindowFocus = false,
   ...props
-}: IPropsQuery) => {
+}: Query) => {
   return useQuery({
     queryKey,
     queryFn: () => getData(url),
@@ -33,6 +33,6 @@ export const useGetData = ({
   });
 };
 
-export const usePostData = ({ url, onSuccess, onError, ...props }: IPropsMutation) => {
+export const usePostData = ({ url, onSuccess, onError, ...props }: Mutation) => {
   return useMutation({ mutationFn: (obj: any) => setData(url, obj), onSuccess, onError, ...props });
 };

@@ -1,3 +1,3 @@
-interface IChildrenProps {
+interface ChildrenProps {
   children: React.ReactNode;
 }

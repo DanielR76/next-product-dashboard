@@ -12,11 +12,22 @@ import { Bar } from 'react-chartjs-2';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-interface IProps {
-  chartData: any;
+interface Chart {
+  chartData: ChartData;
 }
 
-function Chart({ chartData }: IProps) {
+interface ChartData {
+  datasets: Dataset[];
+}
+
+interface Dataset {
+  label: string;
+  data: string[];
+  borderWidth: number;
+  backgroundColor: string[];
+}
+
+function Chart({ chartData }: Chart) {
   return (
     <>
       <Bar

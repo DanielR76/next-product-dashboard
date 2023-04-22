@@ -20,12 +20,17 @@ export default function Dashboard() {
     url: endpoints.products.getListOfProducts(PRD_LIMIT, PRD_OFFSET),
   });
 
-  const categoryList = useMemo(() => products?.map((product: any) => product.category), []);
-  const categoryNames = useMemo(() => categoryList?.map((category: any) => category.name), []);
+  const categoryList = useMemo(() => products?.map((product: any) => product.category), [products]);
+
+  const categoryNames = useMemo(
+    () => categoryList?.map((category: any) => category.name),
+    [categoryList],
+  );
+
   const countOcurrences = useMemo(
     () =>
       categoryNames?.reduce((acc: any, curr: string) => ((acc[curr] = ++acc[curr] || 1), acc), {}),
-    [],
+    [categoryNames],
   );
 
   const chartData = {

@@ -25,7 +25,7 @@ interface IResponse {
 
 const AuthContext = createContext<IArg>({});
 
-export const ProviderAuth: FC<IChildrenProps> = ({ children }) => {
+export const ProviderAuth: FC<ChildrenProps> = ({ children }) => {
   const auth = useProviderAuth();
 
   return <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>;
@@ -34,7 +34,11 @@ export const ProviderAuth: FC<IChildrenProps> = ({ children }) => {
 export const useProviderAuth = () => {
   const [token, setToken] = useState('');
 
-  const authData = useGetData({ queryKey: ['profile'], url: endpoints.auth.profile, enabled: Boolean(token) });
+  const authData = useGetData({
+    queryKey: ['profile'],
+    url: endpoints.auth.profile,
+    enabled: Boolean(token),
+  });
 
   const handleToken = (token: string) => {
     Cookies.set('token', token);

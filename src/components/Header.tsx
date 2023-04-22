@@ -12,19 +12,19 @@ export default function Header() {
     authData: { data },
   } = useAuth();
 
-  const navigation = [
-    { name: 'Dashboard', href: '/dashboard', current: true },
-    { name: 'Products', href: '/', current: false },
+  const navigation: Route[] = [
+    { name: 'Dashboard', path: '/dashboard', isCurrent: true },
+    { name: 'Products', path: '/', isCurrent: false },
   ];
 
-  const userNavigation = [
-    { name: 'Your Profile', href: '/' },
-    { name: 'Settings', href: '/' },
-    { name: 'Sign out', href: '/' },
+  const userNavigation: Route[] = [
+    { name: 'Your Profile', path: '/' },
+    { name: 'Settings', path: '/' },
+    { name: 'Sign out', path: '/' },
   ];
 
-  const classNames = (...classes: any[]) => {
-    return classes.filter(Boolean).join(' ');
+  const classNames = (...rest: string[]) => {
+    return rest.filter(Boolean).join(' ');
   };
 
   if (!data) return null;
@@ -39,7 +39,11 @@ export default function Header() {
                 <div className="flex items-center">
                   <div className="flex-shrink-0">
                     <Link href="/">
-                      <img className="h-8 w-8" src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg" alt="Workflow" />
+                      <img
+                        className="h-8 w-8"
+                        src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
+                        alt="Workflow"
+                      />
                     </Link>
                   </div>
                   <div className="hidden md:block">
@@ -47,9 +51,14 @@ export default function Header() {
                       {navigation.map((item) => (
                         <Link
                           key={item.name}
-                          href={item.href}
-                          className={classNames(item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'px-3 py-2 rounded-md text-sm font-medium')}
-                          aria-current={item.current ? 'page' : undefined}
+                          href={item.path}
+                          className={classNames(
+                            item.isCurrent
+                              ? 'bg-gray-900 text-white'
+                              : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                            'px-3 py-2 rounded-md text-sm font-medium',
+                          )}
+                          aria-current={item.isCurrent ? 'page' : undefined}
                         >
                           {item.name}
                         </Link>
@@ -71,7 +80,11 @@ export default function Header() {
                       <div>
                         <Menu.Button className="max-w-xs bg-gray-800 rounded-full flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                           <span className="sr-only">Open user menu</span>
-                          <img className="h-8 w-8 rounded-full" src={data?.avatar} alt="avatar-image" />
+                          <img
+                            className="h-8 w-8 rounded-full"
+                            src={data?.avatar}
+                            alt="avatar-image"
+                          />
                         </Menu.Button>
                       </div>
 
@@ -88,7 +101,13 @@ export default function Header() {
                           {userNavigation.map((item) => (
                             <Menu.Item key={item.name}>
                               {({ active }) => (
-                                <Link href={item.href} className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}>
+                                <Link
+                                  href={item.path}
+                                  className={classNames(
+                                    active ? 'bg-gray-100' : '',
+                                    'block px-4 py-2 text-sm text-gray-700',
+                                  )}
+                                >
                                   {item.name}
                                 </Link>
                               )}
@@ -102,7 +121,11 @@ export default function Header() {
                 <div className="-mr-2 flex md:hidden">
                   <Disclosure.Button className="bg-gray-800 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                     <span className="sr-only">Open main menu</span>
-                    {open ? <XMarkIcon className="block h-6 w-6" aria-hidden="true" /> : <Bars3Icon className="block h-6 w-6" aria-hidden="true" />}
+                    {open ? (
+                      <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
+                    ) : (
+                      <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
+                    )}
                   </Disclosure.Button>
                 </div>
               </div>
@@ -114,9 +137,14 @@ export default function Header() {
                   <Disclosure.Button
                     key={item.name}
                     as="a"
-                    href={item.href}
-                    className={classNames(item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'block px-3 py-2 rounded-md text-base font-medium')}
-                    aria-current={item.current ? 'page' : undefined}
+                    href={item.path}
+                    className={classNames(
+                      item.isCurrent
+                        ? 'bg-gray-900 text-white'
+                        : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                      'block px-3 py-2 rounded-md text-base font-medium',
+                    )}
+                    aria-current={item.isCurrent ? 'page' : undefined}
                   >
                     {item.name}
                   </Disclosure.Button>
@@ -130,8 +158,12 @@ export default function Header() {
                   </div>
 
                   <div className="ml-3">
-                    <div className="text-base font-medium leading-none text-white">{data?.name}</div>
-                    <div className="text-sm font-medium leading-none text-gray-400">{data?.email}</div>
+                    <div className="text-base font-medium leading-none text-white">
+                      {data?.name}
+                    </div>
+                    <div className="text-sm font-medium leading-none text-gray-400">
+                      {data?.email}
+                    </div>
                   </div>
 
                   <button
@@ -145,7 +177,12 @@ export default function Header() {
 
                 <div className="mt-3 px-2 space-y-1">
                   {userNavigation.map((item) => (
-                    <Disclosure.Button key={item.name} as="a" href={item.href} className="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700">
+                    <Disclosure.Button
+                      key={item.name}
+                      as="a"
+                      href={item.path}
+                      className="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700"
+                    >
                       {item.name}
                     </Disclosure.Button>
                   ))}

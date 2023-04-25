@@ -7,12 +7,12 @@ import { UseQueryResult } from '@tanstack/react-query';
 import { axiosInstance, endpoints } from 'services';
 import { useGetData } from './useFetchData';
 
-interface IArg {
-  authData: UseQueryResult<IResponse>;
+interface AuthContext {
+  authData: UseQueryResult<User>;
   handleToken: (arg: string) => void;
 }
 
-interface IResponse {
+interface User {
   id: number;
   role: string;
   creationAt: string;
@@ -23,7 +23,7 @@ interface IResponse {
   updatedAt: string;
 }
 
-const AuthContext = createContext<IArg>({});
+const AuthContext = createContext<AuthContext>({});
 
 export const ProviderAuth: FC<ChildrenProps> = ({ children }) => {
   const auth = useProviderAuth();

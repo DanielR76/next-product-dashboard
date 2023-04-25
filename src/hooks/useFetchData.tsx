@@ -34,5 +34,10 @@ export const useGetData = ({
 };
 
 export const usePostData = ({ url, onSuccess, onError, ...props }: Mutation) => {
-  return useMutation({ mutationFn: (obj: any) => setData(url, obj), onSuccess, onError, ...props });
+  return useMutation({
+    mutationFn: (obj: Object) => setData(url, obj),
+    onSuccess,
+    onError,
+    ...props,
+  });
 };

@@ -10,7 +10,7 @@ export default function Home() {
 
   const navigation: Route[] = [
     { name: 'Dashboard', path: '/dashboard' },
-    { name: 'Product', path: '/' },
+    { name: 'Product', path: '/dashboard/products' },
   ];
 
   return (

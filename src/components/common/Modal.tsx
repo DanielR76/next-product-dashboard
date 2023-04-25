@@ -5,21 +5,21 @@ import { Dialog, Transition } from '@headlessui/react';
 import { XCircleIcon } from '@heroicons/react/24/solid';
 
 interface Modal {
-  open: boolean;
-  setOpen: (str: boolean) => void;
+  isOpen: boolean;
+  onClose: (arg: boolean) => void;
   children: React.ReactNode;
 }
 
-export default function Modal({ open, setOpen, children }: Modal) {
+export default function Modal({ isOpen, onClose, children }: Modal) {
   const cancelButtonRef = useRef(null);
 
   return (
-    <Transition.Root show={open} as={Fragment}>
+    <Transition.Root show={isOpen} as={Fragment}>
       <Dialog
         as="div"
         className="fixed z-10 inset-0 overflow-y-auto"
         initialFocus={cancelButtonRef}
-        onClose={setOpen}
+        onClose={onClose}
       >
         <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
           <Transition.Child
@@ -50,7 +50,7 @@ export default function Modal({ open, setOpen, children }: Modal) {
                 <XCircleIcon
                   className="flex-shrink-0 h-6 w-6 text-gray-400 cursor-pointer"
                   aria-hidden="true"
-                  onClick={() => setOpen(false)}
+                  onClick={() => onClose(false)}
                   ref={cancelButtonRef}
                 />
               </div>

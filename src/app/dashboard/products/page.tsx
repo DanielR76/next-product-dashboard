@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { CheckIcon } from '@heroicons/react/20/solid';
 
 import Modal from 'components/common/Modal';
+import Form from 'components/Form';
 
 interface Products {
   products: string[];
@@ -133,7 +134,9 @@ export default function Products({ products }: Products) {
           </div>
         </div>
       </div>
-      <Modal onClose={setModalOpen} isOpen={isModalOpen} />
+      <Modal onClose={setModalOpen} isOpen={isModalOpen}>
+        <Form />
+      </Modal>
     </>
   );
 }

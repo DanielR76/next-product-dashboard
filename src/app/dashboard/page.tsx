@@ -1,7 +1,6 @@
 'use client';
 
 import { useMemo } from 'react';
-// import Link from 'next/link';
 
 import { endpoints } from 'services';
 import { useGetData } from 'hooks';

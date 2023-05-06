@@ -1,19 +1,22 @@
 'use client';
 
-import { useRef } from 'react';
 import Link from 'next/link';
 import { LockClosedIcon } from '@heroicons/react/24/solid';
 import { useRouter } from 'next/navigation';
 
-import { useAuth, usePostData } from 'hooks';
+import { useAuth, useForm, usePostData } from 'hooks';
 import { endpoints } from 'services';
+
+interface DataForm {
+  email: string;
+  password: string;
+}
 
 export default function LoginPage() {
   const router = useRouter();
   const { handleToken, authData } = useAuth();
-
-  const emailRef = useRef<HTMLInputElement>(null);
-  const passRef = useRef<HTMLInputElement>(null);
+  const { values, handleChangeInput } = useForm<DataForm>({ email: '', password: '' });
+  const { email, password } = values;
 
   const authLogin = usePostData({
     url: endpoints.auth.login,
@@ -26,9 +29,9 @@ export default function LoginPage() {
 
   const isInvalidUser = authLogin.error?.response?.status === 401;
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const data = { email: emailRef?.current?.value, password: passRef?.current?.value };
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const data = { email, password };
     authLogin.mutate(data);
   };
 
@@ -76,7 +79,8 @@ export default function LoginPage() {
                   id="email-address"
                   name="email"
                   type="email"
-                  ref={emailRef}
+                  value={email}
+                  onChange={handleChangeInput}
                   disabled={authLogin.isLoading}
                   autoComplete="email"
                   required
@@ -94,7 +98,8 @@ export default function LoginPage() {
                   id="password"
                   name="password"
                   type="password"
-                  ref={passRef}
+                  value={password}
+                  onChange={handleChangeInput}
                   disabled={authLogin.isLoading}
                   autoComplete="current-password"
                   required

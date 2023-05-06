@@ -1,24 +1,34 @@
 import { PhotoIcon } from '@heroicons/react/24/solid';
 
+import { useForm } from 'hooks';
+
+interface DataForm {
+  title: string;
+  price: number;
+  description: string;
+}
+
 export default function Form() {
+  const { values, handleChangeInput } = useForm<DataForm>({ title: '', price: 0, description: '' });
+  const { title, price, description } = values;
+
   return (
     <form className="w-full">
       <div className="space-y-12">
         <div className="border-b border-gray-900/10 pb-12">
           <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
             <div className="sm:col-span-3">
-              <label
-                htmlFor="first-name"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
+              <label htmlFor="title" className="block text-sm font-medium leading-6 text-gray-900">
                 Title
               </label>
 
               <div className="mt-2">
                 <input
+                  id="title"
                   type="text"
-                  name="first-name"
-                  id="first-name"
+                  name="title"
+                  value={title}
+                  onChange={handleChangeInput}
                   autoComplete="given-name"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
@@ -26,18 +36,17 @@ export default function Form() {
             </div>
 
             <div className="sm:col-span-3">
-              <label
-                htmlFor="last-name"
-                className="block text-sm font-medium leading-6 text-gray-900"
-              >
+              <label htmlFor="price" className="block text-sm font-medium leading-6 text-gray-900">
                 Price
               </label>
 
               <div className="mt-2">
                 <input
+                  id="price"
                   type="text"
-                  name="last-name"
-                  id="last-name"
+                  name="price"
+                  value={price}
+                  onChange={handleChangeInput}
                   autoComplete="family-name"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
@@ -45,13 +54,18 @@ export default function Form() {
             </div>
 
             <div className="col-span-full">
-              <label htmlFor="about" className="block text-sm font-medium leading-6 text-gray-900">
+              <label
+                htmlFor="description"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
                 Description
               </label>
               <div className="mt-2">
                 <textarea
-                  id="about"
-                  name="about"
+                  id="description"
+                  name="description"
+                  value={description}
+                  onChange={handleChangeInput}
                   rows={3}
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   defaultValue=""

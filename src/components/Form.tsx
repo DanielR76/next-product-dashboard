@@ -1,19 +1,54 @@
+import { useState } from 'react';
 import { PhotoIcon } from '@heroicons/react/24/solid';
 
-import { useForm } from 'hooks';
+import { useForm, usePostData } from 'hooks';
+import { endpoints } from 'services';
 
 interface DataForm {
   title: string;
   price: number;
   description: string;
+  category: number;
 }
 
 export default function Form() {
-  const { values, handleChangeInput } = useForm<DataForm>({ title: '', price: 0, description: '' });
-  const { title, price, description } = values;
+  const { mutate, isError, error } = usePostData({ url: endpoints.products.postProduct });
+  const { values, handleChangeInput } = useForm<DataForm>({
+    title: '',
+    price: 1,
+    description: '',
+    category: 1,
+  });
+
+  const { title, price, description, category } = values;
+  const isInvalidForm = isError && error?.response?.status === 400;
+
+  const [image, setImage] = useState<string>('');
+
+  const handleFileChange = (event: EventInput) => {
+    const fileName = event?.target?.files?.[0]?.name;
+    if (fileName) setImage(fileName);
+  };
+
+  const handleSumbmit = (event: EventSubmit) => {
+    event.preventDefault();
+    mutate({
+      title,
+      price,
+      categoryId: category,
+      description,
+      images: [image],
+    });
+  };
 
   return (
-    <form className="w-full">
+    <form className="w-full" onSubmit={handleSumbmit}>
+      {isInvalidForm && (
+        <section className="mt-4 text-red-600">
+          <span>Something in the form is bad</span>
+        </section>
+      )}
+
       <div className="space-y-12">
         <div className="border-b border-gray-900/10 pb-12">
           <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
@@ -25,12 +60,12 @@ export default function Form() {
               <div className="mt-2">
                 <input
                   id="title"
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   type="text"
                   name="title"
                   value={title}
                   onChange={handleChangeInput}
                   autoComplete="given-name"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
               </div>
             </div>
@@ -43,13 +78,38 @@ export default function Form() {
               <div className="mt-2">
                 <input
                   id="price"
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   type="text"
                   name="price"
                   value={price}
                   onChange={handleChangeInput}
                   autoComplete="family-name"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 />
+              </div>
+            </div>
+
+            <div className="sm:col-span-3">
+              <label
+                htmlFor="category"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
+                Category
+              </label>
+              <div className="mt-2">
+                <select
+                  id="category"
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
+                  name="category"
+                  onChange={handleChangeInput}
+                  value={category}
+                  autoComplete="category-name"
+                >
+                  <option value={1}>Clothes</option>
+                  <option value={2}>Electronics</option>
+                  <option value={3}>Furnite</option>
+                  <option value={4}>Toys</option>
+                  <option value={5}>Others</option>
+                </select>
               </div>
             </div>
 
@@ -63,12 +123,11 @@ export default function Form() {
               <div className="mt-2">
                 <textarea
                   id="description"
+                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   name="description"
                   value={description}
                   onChange={handleChangeInput}
                   rows={3}
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  defaultValue=""
                 />
               </div>
               <p className="mt-3 text-sm leading-6 text-gray-600">
@@ -92,7 +151,13 @@ export default function Form() {
                       className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
                     >
                       <span>Upload a file</span>
-                      <input id="file-upload" name="file-upload" type="file" className="sr-only" />
+                      <input
+                        id="file-upload"
+                        className="sr-only"
+                        name="file-upload"
+                        type="file"
+                        onChange={handleFileChange}
+                      />
                     </label>
                     <p className="pl-1">or drag and drop</p>
                   </div>

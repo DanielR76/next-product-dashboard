@@ -29,7 +29,7 @@ export default function LoginPage() {
 
   const isInvalidUser = authLogin.error?.response?.status === 401;
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: EventSubmit) => {
     event.preventDefault();
     const data = { email, password };
     authLogin.mutate(data);

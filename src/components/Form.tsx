@@ -12,7 +12,10 @@ interface DataForm {
 }
 
 export default function Form() {
-  const { mutate, isError, error } = usePostData({ url: endpoints.products.postProduct });
+  const { mutate, isError, error } = usePostData({
+    url: endpoints.products.postProduct,
+  });
+
   const { values, handleChangeInput } = useForm<DataForm>({
     title: '',
     price: 1,
@@ -21,7 +24,9 @@ export default function Form() {
   });
 
   const { title, price, description, category } = values;
-  const isInvalidForm = isError && error?.response?.status === 400;
+
+  const isInvalidForm: boolean = isError && error?.response?.status === 400;
+  const errorMessages: string[] = error?.response?.data?.message;
 
   const [image, setImage] = useState<string>('');
 
@@ -43,9 +48,11 @@ export default function Form() {
 
   return (
     <form className="w-full" onSubmit={handleSumbmit}>
-      {isInvalidForm && (
+      {isInvalidForm && errorMessages && (
         <section className="mt-4 text-red-600">
-          <span>Something in the form is bad</span>
+          {errorMessages?.map((error, index) => (
+            <span key={index}>{error}</span>
+          ))}
         </section>
       )}
 

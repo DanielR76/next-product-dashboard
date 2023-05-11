@@ -1,3 +1,4 @@
+import { FC, memo } from 'react';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -7,7 +8,6 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
-import { memo } from 'react';
 import { Bar } from 'react-chartjs-2';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
@@ -27,19 +27,15 @@ interface Dataset {
   backgroundColor: string[];
 }
 
-function Chart({ chartData }: Chart) {
-  return (
-    <>
-      <Bar
-        className="mb-8 bt-2"
-        data={chartData}
-        options={{
-          title: { display: true, text: 'Category', fontSize: 20 },
-          legend: { display: true, position: 'right' },
-        }}
-      />
-    </>
-  );
-}
+const Chart: FC<Chart> = ({ chartData }) => (
+  <Bar
+    className="mb-8 bt-2"
+    data={chartData}
+    options={{
+      title: { display: true, text: 'Category', fontSize: 20 },
+      legend: { display: true, position: 'right' },
+    }}
+  />
+);
 
 export default memo(Chart);

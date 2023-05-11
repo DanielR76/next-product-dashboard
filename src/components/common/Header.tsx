@@ -7,7 +7,7 @@ import { BellIcon, Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 
 import { useAuth } from 'hooks/useAuth';
 
-export default function Header() {
+export const Header = () => {
   const {
     authData: { data },
   } = useAuth();
@@ -194,4 +194,4 @@ export default function Header() {
       </Disclosure>
     </>
   );
-}
+};

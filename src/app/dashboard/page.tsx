@@ -4,7 +4,7 @@ import { useMemo } from 'react';
 
 import { endpoints } from 'services';
 import { useGetData } from 'hooks';
-import Chart from 'components/common/Chart';
+import Chart from '@dashboardComponents/Chart';
 
 const PRD_LIMIT = 5;
 const PRD_OFFSET = 5;

@@ -1,6 +1,5 @@
 import ProviderTanstack from 'providers/Tanstack';
-import Header from 'components/Header';
-import Nav from 'components/common/Nav';
+import { Header, Nav } from '@common/index';
 
 import { ProviderAuth } from 'hooks/useAuth';
 import '../styles/global.css';

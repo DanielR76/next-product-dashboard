@@ -1,7 +1,7 @@
 'use client';
 import { usePathname } from 'next/navigation';
 
-export default function Nav() {
+export const Nav = () => {
   const pathName = usePathname();
 
   return (
@@ -11,4 +11,4 @@ export default function Nav() {
       </div>
     </nav>
   );
-}
+};

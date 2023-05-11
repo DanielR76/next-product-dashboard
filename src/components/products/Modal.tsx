@@ -1,6 +1,6 @@
 'use client';
 
-import { Fragment, useRef } from 'react';
+import { FC, Fragment, useRef } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { XCircleIcon } from '@heroicons/react/24/solid';
 
@@ -10,7 +10,7 @@ interface Modal {
   children: React.ReactNode;
 }
 
-export default function Modal({ isOpen, onClose, children }: Modal) {
+export const Modal: FC<Modal> = ({ isOpen, onClose, children }) => {
   const cancelButtonRef = useRef(null);
 
   return (
@@ -63,4 +63,4 @@ export default function Modal({ isOpen, onClose, children }: Modal) {
       </Dialog>
     </Transition.Root>
   );
-}
+};

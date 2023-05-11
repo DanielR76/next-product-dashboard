@@ -4,8 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { CheckIcon } from '@heroicons/react/20/solid';
 
-import Modal from 'components/common/Modal';
-import Form from 'components/Form';
+import { Modal, Form } from '@productsComponents/index';
 
 interface Products {
   products: string[];

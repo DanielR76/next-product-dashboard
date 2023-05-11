@@ -21,12 +21,14 @@
     ],
     "baseUrl": "src",
     "paths": {
-      "@styles*": ["app/styles/*"],
-      "@components*": ["app/components/*"],
-      "@common*": ["app/components/common/*"],
-      "@hooks*": ["app/components/hooks/*"],
-      "@providers*": ["app/components/providers/*"],
-      "@services*": ["app/components/services/*"]
+      "@styles/*": ["styles/*"],
+      "@common/*": ["components/common/*"],
+      "@loginComponents/*": ["components/login/*"],
+      "@dashboardComponents/*": ["components/dashboard/*"],
+      "@productsComponents/*": ["components/products/*"],
+      "@hooks/*": ["hooks/*"],
+      "@providers/*": ["providers/*"],
+      "@services/*": ["services/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

@@ -11,7 +11,7 @@ interface DataForm {
   category: number;
 }
 
-export default function Form() {
+export const Form = () => {
   const { mutate, isError, error } = usePostData({
     url: endpoints.products.postProduct,
   });
@@ -189,4 +189,4 @@ export default function Form() {
       </div>
     </form>
   );
-}
+};

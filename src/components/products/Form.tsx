@@ -1,9 +1,12 @@
-import { useState } from 'react';
+import { FC, useState } from 'react';
 import { PhotoIcon } from '@heroicons/react/24/solid';
 
 import { useForm, usePostData } from 'hooks';
 import { endpoints } from 'services';
-
+interface Form {
+  onClose: () => void;
+  refetch: () => void;
+}
 interface DataForm {
   title: string;
   price: number;
@@ -11,19 +14,24 @@ interface DataForm {
   category: number;
 }
 
-export const Form = () => {
-  const { mutate, isError, error } = usePostData({
-    url: endpoints.products.postProduct,
-  });
-
+export const Form: FC<Form> = ({ refetch, onClose }) => {
   const { values, handleChangeInput } = useForm<DataForm>({
     title: '',
     price: 1,
-    description: '',
     category: 1,
+    description: '',
   });
-
   const { title, price, description, category } = values;
+
+  const { mutate, isError, error } = usePostData({
+    url: endpoints.products.addProduct,
+    onSuccess(response) {
+      if (response?.id) {
+        refetch();
+        onClose();
+      }
+    },
+  });
 
   const isInvalidForm: boolean = isError && error?.response?.status === 400;
   const errorMessages: string[] = error?.response?.data?.message;
@@ -42,7 +50,7 @@ export const Form = () => {
       price,
       categoryId: category,
       description,
-      images: [image],
+      images: [/* image */ 'https://picsum.photos/640/640?r=4586'],
     });
   };
 
@@ -102,6 +110,7 @@ export const Form = () => {
               >
                 Category
               </label>
+
               <div className="mt-2">
                 <select
                   id="category"
@@ -127,6 +136,7 @@ export const Form = () => {
               >
                 Description
               </label>
+
               <div className="mt-2">
                 <textarea
                   id="description"
@@ -137,6 +147,7 @@ export const Form = () => {
                   rows={3}
                 />
               </div>
+
               <p className="mt-3 text-sm leading-6 text-gray-600">
                 Write a few sentences about yourself.
               </p>
@@ -149,15 +160,18 @@ export const Form = () => {
               >
                 Update photo
               </label>
+
               <div className="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
                 <div className="text-center">
                   <PhotoIcon className="mx-auto h-12 w-12 text-gray-300" aria-hidden="true" />
+
                   <div className="mt-4 flex text-sm leading-6 text-gray-600">
                     <label
                       htmlFor="file-upload"
                       className="relative cursor-pointer rounded-md bg-white font-semibold text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
                     >
                       <span>Upload a file</span>
+
                       <input
                         id="file-upload"
                         className="sr-only"
@@ -166,6 +180,7 @@ export const Form = () => {
                         onChange={handleFileChange}
                       />
                     </label>
+
                     <p className="pl-1">or drag and drop</p>
                   </div>
                   <p className="text-xs leading-5 text-gray-600">PNG, JPG, GIF up to 10MB</p>
@@ -180,6 +195,7 @@ export const Form = () => {
         <button type="button" className="text-sm font-semibold leading-6 text-gray-900">
           Cancel
         </button>
+
         <button
           type="submit"
           className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"

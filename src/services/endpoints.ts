@@ -9,12 +9,17 @@ export const endpoints = {
     userAvailable: `/users/is-available`,
   },
   products: {
-    getListOfProducts: (limit: number, offset: number) => `/products?limit=${limit}&offset=${offset}`,
-    postProduct: `/products`,
+    getListOfProducts: (limit: number, offset: number) =>
+      `/products?limit=${limit}&offset=${offset}`,
+    getAllProducts: `/products`,
+    addProduct: `/products`,
     getProductById: (id: string) => `/products/${id}`,
     putProductById: (id: string) => `/products/${id}`,
     removeProductById: (id: string) => `/products/{id}`,
   },
-  categories: { getListOfCategories: `/categories`, getCategoryById: (id: string) => `/categories/${id}` },
+  categories: {
+    getListOfCategories: `/categories`,
+    getCategoryById: (id: string) => `/categories/${id}`,
+  },
   files: { getFile: (filename: string) => `/files/${filename}`, postFile: `/files/upload` },
 };

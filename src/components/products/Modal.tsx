@@ -4,13 +4,15 @@ import { FC, Fragment, useRef } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { XCircleIcon } from '@heroicons/react/24/solid';
 
+import { Form } from './Form';
+
 interface Modal {
   isOpen: boolean;
-  onClose: (arg: boolean) => void;
-  children: React.ReactNode;
+  onClose: () => void;
+  refetch: any;
 }
 
-export const Modal: FC<Modal> = ({ isOpen, onClose, children }) => {
+export const Modal: FC<Modal> = ({ isOpen, onClose, refetch }) => {
   const cancelButtonRef = useRef(null);
 
   return (
@@ -50,12 +52,14 @@ export const Modal: FC<Modal> = ({ isOpen, onClose, children }) => {
                 <XCircleIcon
                   className="flex-shrink-0 h-6 w-6 text-gray-400 cursor-pointer"
                   aria-hidden="true"
-                  onClick={() => onClose(false)}
+                  onClick={onClose}
                   ref={cancelButtonRef}
                 />
               </div>
               <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                <div className="sm:flex sm:items-start">{children}</div>
+                <div className="sm:flex sm:items-start">
+                  <Form refetch={refetch} onClose={onClose} />
+                </div>
               </div>
             </div>
           </Transition.Child>

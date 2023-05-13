@@ -4,14 +4,17 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { CheckIcon } from '@heroicons/react/20/solid';
 
-import { Modal, Form } from '@productsComponents/index';
+import { useGetData } from '@hooks/useFetchData';
+import { endpoints } from '@services/endpoints';
+import { Modal } from '@productsComponents/index';
 
-interface Products {
-  products: string[];
-}
-
-export default function Products({ products }: Products) {
+export default function Products() {
   const [isModalOpen, setModalOpen] = useState(false);
+
+  const { data: products, refetch } = useGetData({
+    queryKey: ['list-all-products'],
+    url: endpoints.products.getAllProducts,
+  });
 
   const handleCloseModal = () => setModalOpen(false);
 
@@ -25,6 +28,7 @@ export default function Products({ products }: Products) {
             List of products
           </h2>
         </div>
+
         <div className="mt-5 flex lg:ml-4 lg:mt-0">
           <span className="sm:ml-3">
             <button
@@ -52,27 +56,32 @@ export default function Products({ products }: Products) {
                     >
                       Name
                     </th>
+
                     <th
                       scope="col"
                       className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                     >
                       CATEGORY
                     </th>
+
                     <th
                       scope="col"
                       className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                     >
                       Price
                     </th>
+
                     <th
                       scope="col"
                       className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                     >
                       ID
                     </th>
+
                     <th scope="col" className="relative px-6 py-3">
                       <span className="sr-only">Edit</span>
                     </th>
+
                     <th scope="col" className="relative px-6 py-3">
                       <span className="sr-only">Edit</span>
                     </th>
@@ -133,9 +142,8 @@ export default function Products({ products }: Products) {
           </div>
         </div>
       </div>
-      <Modal onClose={setModalOpen} isOpen={isModalOpen}>
-        <Form />
-      </Modal>
+
+      <Modal onClose={handleCloseModal} isOpen={isModalOpen} refetch={refetch} />
     </>
   );
 }

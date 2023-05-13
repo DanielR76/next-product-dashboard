@@ -8,12 +8,22 @@ export const axiosInstance = axios.create({
   },
 });
 
-export const getData = async (url: string): Promise<any> => {
+export const getData = async (url: string): Promise<unknown> => {
   const response = await axiosInstance.get(url);
   return response.data;
 };
 
-export const setData = async <T extends Object>(url: string, data?: T): Promise<any> => {
+export const setData = async <T extends Object>(url: string, data?: T): Promise<unknown> => {
   const response = await axiosInstance.post(url, data);
+  return response.data;
+};
+
+export const deleteData = async (url: string): Promise<unknown> => {
+  const response = await axiosInstance.delete(url);
+  return response.data;
+};
+
+export const updateData = async <T extends Object>(url: string, data?: T): Promise<unknown> => {
+  const response = await axiosInstance.put(url, data);
   return response.data;
 };

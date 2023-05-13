@@ -1,10 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import Link from 'next/link';
-import { CheckIcon } from '@heroicons/react/20/solid';
+import { CheckIcon, TrashIcon, PencilSquareIcon } from '@heroicons/react/20/solid';
 
-import { useGetData } from '@hooks/useFetchData';
+import { useGetData, useDeleteData } from '@hooks/useFetchData';
 import { endpoints } from '@services/endpoints';
 import { Modal } from '@productsComponents/index';
 
@@ -14,6 +13,12 @@ export default function Products() {
   const { data: products, refetch } = useGetData({
     queryKey: ['list-all-products'],
     url: endpoints.products.getAllProducts,
+  });
+
+  const { mutate } = useDeleteData({
+    onSuccess(result) {
+      if (result) refetch();
+    },
   });
 
   const handleCloseModal = () => setModalOpen(false);
@@ -124,15 +129,14 @@ export default function Products() {
                       </td>
 
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <Link href="#" className="text-indigo-600 hover:text-indigo-900">
-                          Edit
-                        </Link>
+                        <PencilSquareIcon className="h-5 cursor-pointer text-blue-500" />
                       </td>
 
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <Link href="#" className="text-indigo-600 hover:text-indigo-900">
-                          Remove
-                        </Link>
+                        <TrashIcon
+                          className="h-5 cursor-pointer text-red-400"
+                          onClick={() => mutate(endpoints.products.removeProductById(product.id))}
+                        />
                       </td>
                     </tr>
                   ))}

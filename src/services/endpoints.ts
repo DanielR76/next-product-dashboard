@@ -15,7 +15,7 @@ export const endpoints = {
     addProduct: `/products`,
     getProductById: (id: string) => `/products/${id}`,
     putProductById: (id: string) => `/products/${id}`,
-    removeProductById: (id: string) => `/products/{id}`,
+    removeProductById: (id: string) => `/products/${id}`,
   },
   categories: {
     getListOfCategories: `/categories`,

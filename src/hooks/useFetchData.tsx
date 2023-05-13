@@ -1,21 +1,18 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { getData, setData } from 'services';
+import { deleteData, getData, setData } from 'services';
 
 interface Query /* extends ReturnType<typeof useQuery> */ {
-  queryKey: string[];
   url: string;
+  queryKey: string[];
   enabled?: boolean;
   refetchOnWindowFocus?: boolean;
-  onSuccess?: (arg: any) => any;
-  onError?: (arg: any) => any;
+  onSuccess?: (arg: unknown) => unknown;
+  onError?: (arg: unknown) => unknown;
 }
 
-interface Mutation /* extends Parameters<typeof useMutation> */ {
-  url: string;
-  onSuccess?: (arg: any) => void;
-  onError?: (arg: any) => void;
-}
+interface Mutation extends Omit<Query, 'queryKey' | 'enabled' | 'refetchOnWindowFocus'> {}
+interface MutationDelete extends Omit<Mutation, 'url'> {}
 
 export const useGetData = ({
   queryKey,
@@ -36,6 +33,15 @@ export const useGetData = ({
 export const usePostData = ({ url, onSuccess, onError, ...props }: Mutation) => {
   return useMutation({
     mutationFn: (obj: Object) => setData(url, obj),
+    onSuccess,
+    onError,
+    ...props,
+  });
+};
+
+export const useDeleteData = ({ onSuccess, onError, ...props }: MutationDelete) => {
+  return useMutation({
+    mutationFn: (urlParam: string) => deleteData(urlParam),
     onSuccess,
     onError,
     ...props,

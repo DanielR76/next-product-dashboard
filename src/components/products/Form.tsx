@@ -6,6 +6,7 @@ import { endpoints } from 'services';
 interface Form {
   onClose: () => void;
   refetch: () => void;
+  initialData?: DataForm;
 }
 interface DataForm {
   title: string;
@@ -14,7 +15,7 @@ interface DataForm {
   category: number;
 }
 
-export const Form: FC<Form> = ({ refetch, onClose }) => {
+export const Form: FC<Form> = ({ refetch, onClose, initialData }) => {
   const { values, handleChangeInput } = useForm<DataForm>({
     title: '',
     price: 1,
@@ -78,6 +79,7 @@ export const Form: FC<Form> = ({ refetch, onClose }) => {
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   type="text"
                   name="title"
+                  defaultValue={initialData?.title}
                   value={title}
                   onChange={handleChangeInput}
                   autoComplete="given-name"
@@ -96,6 +98,7 @@ export const Form: FC<Form> = ({ refetch, onClose }) => {
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   type="text"
                   name="price"
+                  defaultValue={initialData?.price}
                   value={price}
                   onChange={handleChangeInput}
                   autoComplete="family-name"
@@ -117,6 +120,7 @@ export const Form: FC<Form> = ({ refetch, onClose }) => {
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
                   name="category"
                   onChange={handleChangeInput}
+                  defaultValue={initialData?.category}
                   value={category}
                   autoComplete="category-name"
                 >
@@ -142,6 +146,7 @@ export const Form: FC<Form> = ({ refetch, onClose }) => {
                   id="description"
                   className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   name="description"
+                  defaultValue={initialData?.description}
                   value={description}
                   onChange={handleChangeInput}
                   rows={3}

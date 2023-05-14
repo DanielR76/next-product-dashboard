@@ -6,6 +6,7 @@ import { CheckIcon, TrashIcon, PencilSquareIcon } from '@heroicons/react/20/soli
 import { useGetData, useDeleteData } from '@hooks/useFetchData';
 import { endpoints } from '@services/endpoints';
 import { Modal } from '@productsComponents/index';
+import Link from 'next/link';
 
 export default function Products() {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -129,7 +130,9 @@ export default function Products() {
                       </td>
 
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <PencilSquareIcon className="h-5 cursor-pointer text-blue-500" />
+                        <Link href={`/dashboard/products/${product.id}`}>
+                          <PencilSquareIcon className="h-5 cursor-pointer text-blue-500" />
+                        </Link>
                       </td>
 
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">

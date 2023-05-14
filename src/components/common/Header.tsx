@@ -10,17 +10,12 @@ import { useAuth } from 'hooks/useAuth';
 export const Header = () => {
   const {
     authData: { data },
+    logoutUser,
   } = useAuth();
 
   const navigation: Route[] = [
     { name: 'Dashboard', path: '/dashboard', isCurrent: true },
     { name: 'Products', path: '/', isCurrent: false },
-  ];
-
-  const userNavigation: Route[] = [
-    { name: 'Your Profile', path: '/' },
-    { name: 'Settings', path: '/' },
-    { name: 'Sign out', path: '/' },
   ];
 
   const classNames = (...rest: string[]) => {
@@ -98,21 +93,12 @@ export const Header = () => {
                         leaveTo="transform opacity-0 scale-95"
                       >
                         <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-                          {userNavigation.map((item) => (
-                            <Menu.Item key={item.name}>
-                              {({ active }) => (
-                                <Link
-                                  href={item.path}
-                                  className={classNames(
-                                    active ? 'bg-gray-100' : '',
-                                    'block px-4 py-2 text-sm text-gray-700',
-                                  )}
-                                >
-                                  {item.name}
-                                </Link>
-                              )}
-                            </Menu.Item>
-                          ))}
+                          <button
+                            className="block px-4 py-2 text-sm text-gray-700"
+                            onClick={logoutUser}
+                          >
+                            Logout
+                          </button>
                         </Menu.Items>
                       </Transition>
                     </Menu>
@@ -173,19 +159,6 @@ export const Header = () => {
                     <span className="sr-only">View notifications</span>
                     <BellIcon className="h-6 w-6" aria-hidden="true" />
                   </button>
-                </div>
-
-                <div className="mt-3 px-2 space-y-1">
-                  {userNavigation.map((item) => (
-                    <Disclosure.Button
-                      key={item.name}
-                      as="a"
-                      href={item.path}
-                      className="block px-3 py-2 rounded-md text-base font-medium text-gray-400 hover:text-white hover:bg-gray-700"
-                    >
-                      {item.name}
-                    </Disclosure.Button>
-                  ))}
                 </div>
               </div>
             </Disclosure.Panel>

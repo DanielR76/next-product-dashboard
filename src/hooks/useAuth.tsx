@@ -10,6 +10,7 @@ import { useGetData } from './useFetchData';
 interface AuthContext {
   authData: UseQueryResult<User>;
   handleToken: (arg: string) => void;
+  logoutUser: () => void;
 }
 
 interface User {
@@ -46,7 +47,14 @@ export const useProviderAuth = () => {
     setToken(token);
   };
 
-  return { authData, handleToken };
+  const logoutUser = () => {
+    setToken('');
+    Cookies.remove('token');
+    delete axiosInstance.defaults.headers.common.Authorization;
+    window.location.href = '/login';
+  };
+
+  return { authData, handleToken, logoutUser };
 };
 
 export const useAuth = () => useContext(AuthContext);

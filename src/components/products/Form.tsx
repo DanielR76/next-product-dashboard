@@ -3,15 +3,14 @@ import { PhotoIcon } from '@heroicons/react/24/solid';
 
 import { useForm, usePostData } from 'hooks';
 import { endpoints } from 'services';
+import { Product } from 'types';
 interface Form {
   onClose: () => void;
   refetch: () => void;
   initialData?: DataForm;
 }
-interface DataForm {
-  title: string;
-  price: number;
-  description: string;
+
+interface DataForm extends Pick<Product, 'title' | 'price' | 'description'> {
   category: number;
 }
 

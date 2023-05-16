@@ -7,6 +7,7 @@ import { useGetData, useDeleteData } from '@hooks/useFetchData';
 import { endpoints } from '@services/endpoints';
 import { Modal } from '@productsComponents/index';
 import Link from 'next/link';
+import { Product } from 'types';
 
 export default function Products() {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -95,8 +96,8 @@ export default function Products() {
                 </thead>
 
                 <tbody className="bg-white divide-y divide-gray-200">
-                  {products?.map((product: any) => (
-                    <tr key={product.email}>
+                  {products?.map((product: Product) => (
+                    <tr key={product.id}>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="flex items-center">
                           <div className="flex-shrink-0 h-10 w-10">

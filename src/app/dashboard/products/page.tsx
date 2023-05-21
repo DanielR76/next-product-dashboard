@@ -1,13 +1,13 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import { CheckIcon, TrashIcon, PencilSquareIcon } from '@heroicons/react/20/solid';
 
-import { useGetData, useDeleteData } from '@hooks/useFetchData';
-import { endpoints } from '@services/endpoints';
-import { Modal } from '@productsComponents/index';
-import Link from 'next/link';
-import { Product } from 'types';
+import { useGetData, useDeleteData } from '@hooks';
+import { endpoints } from '@services';
+import { Modal } from '@productsComponents';
+import { Product } from '@types';
 
 export default function Products() {
   const [isModalOpen, setModalOpen] = useState(false);

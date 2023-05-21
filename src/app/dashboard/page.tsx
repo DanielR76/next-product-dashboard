@@ -2,9 +2,9 @@
 
 import { useMemo } from 'react';
 
-import { endpoints } from 'services';
-import { useGetData } from 'hooks';
-import Chart from '@dashboardComponents/Chart';
+import { endpoints } from '@services';
+import { useGetData } from '@hooks';
+import { Chart } from '@dashboardComponents';
 
 const PRD_LIMIT = 5;
 const PRD_OFFSET = 5;

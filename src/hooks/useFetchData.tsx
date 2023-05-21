@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { deleteData, getData, setData } from 'services';
+import { deleteData, getData, setData } from '@services';
 
 interface Query /* extends ReturnType<typeof useQuery> */ {
   url: string;

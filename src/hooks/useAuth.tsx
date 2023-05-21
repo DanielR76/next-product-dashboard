@@ -4,8 +4,8 @@ import { createContext, useContext, FC, useState } from 'react';
 import Cookies from 'js-cookie';
 import { UseQueryResult } from '@tanstack/react-query';
 
-import { axiosInstance, endpoints } from 'services';
-import { useGetData } from './useFetchData';
+import { axiosInstance, endpoints } from '@services';
+import { useGetData } from '@hooks';
 
 interface AuthContext {
   authData: UseQueryResult<User>;

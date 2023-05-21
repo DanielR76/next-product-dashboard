@@ -27,7 +27,7 @@ interface Dataset {
   backgroundColor: string[];
 }
 
-const Chart: FC<Chart> = ({ chartData }) => (
+export const Chart: FC<Chart> = memo(({ chartData }) => (
   <Bar
     className="mb-8 bt-2"
     data={chartData}
@@ -36,6 +36,4 @@ const Chart: FC<Chart> = ({ chartData }) => (
       legend: { display: true, position: 'right' },
     }}
   />
-);
-
-export default memo(Chart);
+));

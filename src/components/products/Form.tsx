@@ -1,9 +1,9 @@
 import { FC, useState } from 'react';
 import { PhotoIcon } from '@heroicons/react/24/solid';
 
-import { useForm, usePostData } from 'hooks';
-import { endpoints } from 'services';
-import { Product } from 'types';
+import { useForm, usePostData } from '@hooks';
+import { endpoints } from '@services';
+import { Product } from '@types';
 interface Form {
   onClose: () => void;
   refetch: () => void;

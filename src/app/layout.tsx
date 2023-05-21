@@ -1,7 +1,7 @@
-import ProviderTanstack from 'providers/Tanstack';
-import { Header, Nav } from '@common/index';
+import { ProviderTanstack } from '@providers';
+import { Header, Nav } from '@common';
 
-import { ProviderAuth } from 'hooks/useAuth';
+import { ProviderAuth } from '@hooks';
 import '../styles/global.css';
 
 export const metadata = {

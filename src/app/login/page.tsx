@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { LockClosedIcon } from '@heroicons/react/24/solid';
 import { useRouter } from 'next/navigation';
 
-import { useAuth, useForm, usePostData } from 'hooks';
+import { useAuth, useForm, usePostData } from '@hooks';
 import { endpoints } from 'services';
 
 interface DataForm {

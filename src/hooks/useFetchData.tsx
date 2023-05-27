@@ -2,26 +2,17 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { deleteData, getData, setData } from '@services';
 
-interface Query /* extends ReturnType<typeof useQuery> */ {
-  url: string;
-  queryKey: string[];
-  enabled?: boolean;
-  refetchOnWindowFocus?: boolean;
-  onSuccess?: (arg: unknown) => unknown;
-  onError?: (arg: unknown) => unknown;
-}
-
-interface QueryTest<T> {
+interface Query<T> {
   url: string;
   queryKey: string[];
   enabled?: boolean;
   refetchOnWindowFocus?: boolean;
   onSuccess?: (arg: T) => void;
-  onError?: (arg: Error) => void;
+  onError?: (arg: Response) => void;
 }
 
-interface Mutation extends Omit<Query, 'queryKey' | 'enabled' | 'refetchOnWindowFocus'> {}
-interface MutationDelete extends Omit<Mutation, 'url'> {}
+interface Mutation<T> extends Omit<Query<T>, 'queryKey' | 'enabled' | 'refetchOnWindowFocus'> {}
+interface MutationDelete<T> extends Omit<Mutation<T>, 'url'> {}
 
 export const useGetData = <T extends Object>({
   queryKey,
@@ -29,7 +20,7 @@ export const useGetData = <T extends Object>({
   enabled = true,
   refetchOnWindowFocus = false,
   ...rest
-}: QueryTest<T>) => {
+}: Query<T>) => {
   return useQuery({
     queryKey,
     enabled,
@@ -39,7 +30,12 @@ export const useGetData = <T extends Object>({
   });
 };
 
-export const usePostData = ({ url, onSuccess, onError, ...rest }: Mutation) => {
+export const usePostData = <T extends Object>({
+  url,
+  onSuccess,
+  onError,
+  ...rest
+}: Mutation<T>) => {
   return useMutation({
     mutationFn: (obj: Object) => setData(url, obj),
     onSuccess,
@@ -48,7 +44,11 @@ export const usePostData = ({ url, onSuccess, onError, ...rest }: Mutation) => {
   });
 };
 
-export const useDeleteData = ({ onSuccess, onError, ...rest }: MutationDelete) => {
+export const useDeleteData = <T extends Object>({
+  onSuccess,
+  onError,
+  ...rest
+}: MutationDelete<T>) => {
   return useMutation({
     mutationFn: (urlParam: string) => deleteData(urlParam),
     onSuccess,

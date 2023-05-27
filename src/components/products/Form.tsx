@@ -23,7 +23,7 @@ export const Form: FC<Form> = ({ refetch, onClose, initialData }) => {
   });
   const { title, price, description, category } = values;
 
-  const { mutate, isError, error } = usePostData({
+  const { mutate, isError, error } = usePostData<Product>({
     url: endpoints.products.addProduct,
     onSuccess(response) {
       if (response?.id) {

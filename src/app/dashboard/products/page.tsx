@@ -17,7 +17,7 @@ export default function Products() {
     url: endpoints.products.getAllProducts,
   });
 
-  const { mutate } = useDeleteData({
+  const { mutate } = useDeleteData<boolean>({
     onSuccess(result) {
       if (result) refetch();
     },

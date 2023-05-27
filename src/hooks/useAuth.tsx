@@ -35,7 +35,7 @@ export const ProviderAuth: FC<ChildrenProps> = ({ children }) => {
 export const useProviderAuth = () => {
   const [token, setToken] = useState('');
 
-  const authData = useGetData({
+  const authData = useGetData<User>({
     queryKey: ['profile'],
     url: endpoints.auth.profile,
     enabled: Boolean(token),

@@ -12,7 +12,7 @@ import { Product } from '@types';
 export default function Products() {
   const [isModalOpen, setModalOpen] = useState(false);
 
-  const { data: products, refetch } = useGetData({
+  const { data: products, refetch } = useGetData<Product[]>({
     queryKey: ['list-all-products'],
     url: endpoints.products.getAllProducts,
   });
@@ -96,7 +96,7 @@ export default function Products() {
                 </thead>
 
                 <tbody className="bg-white divide-y divide-gray-200">
-                  {products?.map((product: Product) => (
+                  {products?.map((product) => (
                     <tr key={product.id}>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="flex items-center">

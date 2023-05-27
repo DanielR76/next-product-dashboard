@@ -11,39 +11,48 @@ interface Query /* extends ReturnType<typeof useQuery> */ {
   onError?: (arg: unknown) => unknown;
 }
 
+interface QueryTest<T> {
+  url: string;
+  queryKey: string[];
+  enabled?: boolean;
+  refetchOnWindowFocus?: boolean;
+  onSuccess?: (arg: T) => void;
+  onError?: (arg: Error) => void;
+}
+
 interface Mutation extends Omit<Query, 'queryKey' | 'enabled' | 'refetchOnWindowFocus'> {}
 interface MutationDelete extends Omit<Mutation, 'url'> {}
 
-export const useGetData = ({
+export const useGetData = <T extends Object>({
   queryKey,
   url,
   enabled = true,
   refetchOnWindowFocus = false,
-  ...props
-}: Query) => {
+  ...rest
+}: QueryTest<T>) => {
   return useQuery({
     queryKey,
-    queryFn: () => getData(url),
     enabled,
+    queryFn: () => getData(url),
     refetchOnWindowFocus,
-    ...props,
+    ...rest,
   });
 };
 
-export const usePostData = ({ url, onSuccess, onError, ...props }: Mutation) => {
+export const usePostData = ({ url, onSuccess, onError, ...rest }: Mutation) => {
   return useMutation({
     mutationFn: (obj: Object) => setData(url, obj),
     onSuccess,
     onError,
-    ...props,
+    ...rest,
   });
 };
 
-export const useDeleteData = ({ onSuccess, onError, ...props }: MutationDelete) => {
+export const useDeleteData = ({ onSuccess, onError, ...rest }: MutationDelete) => {
   return useMutation({
     mutationFn: (urlParam: string) => deleteData(urlParam),
     onSuccess,
     onError,
-    ...props,
+    ...rest,
   });
 };

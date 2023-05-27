@@ -5,6 +5,7 @@ import { useMemo } from 'react';
 import { endpoints } from '@services';
 import { useGetData } from '@hooks';
 import { Chart } from '@dashboardComponents';
+import { Product } from '@types';
 
 const PRD_LIMIT = 5;
 const PRD_OFFSET = 5;
@@ -14,15 +15,15 @@ export default function Dashboard() {
     data: products,
     isFetching,
     isLoading,
-  } = useGetData({
+  } = useGetData<Product[]>({
     queryKey: ['list-products'],
     url: endpoints.products.getListOfProducts(PRD_LIMIT, PRD_OFFSET),
   });
 
-  const categoryList = useMemo(() => products?.map((product: any) => product.category), [products]);
+  const categoryList = useMemo(() => products?.map((product) => product.category), [products]);
 
   const categoryNames = useMemo(
-    () => categoryList?.map((category: any) => category.name),
+    () => categoryList?.map((category) => category.name),
     [categoryList],
   );
 

@@ -12,13 +12,18 @@ interface DataForm {
   password: string;
 }
 
+interface Token {
+  access_token: string;
+  refresh_token: string;
+}
+
 export default function LoginPage() {
   const router = useRouter();
   const { handleToken, authData } = useAuth();
   const { values, handleChangeInput } = useForm<DataForm>({ email: '', password: '' });
   const { email, password } = values;
 
-  const authLogin = usePostData({
+  const authLogin = usePostData<Token>({
     url: endpoints.auth.login,
     onSuccess: ({ access_token }) => {
       if (access_token) {

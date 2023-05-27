@@ -23,7 +23,7 @@ export const Form: FC<Form> = ({ refetch, onClose, initialData }) => {
   });
   const { title, price, description, category } = values;
 
-  const { mutate, isError, error } = usePostData<Product>({
+  const { mutate, error } = usePostData<Product>({
     url: endpoints.products.addProduct,
     onSuccess(response) {
       if (response?.id) {
@@ -33,8 +33,8 @@ export const Form: FC<Form> = ({ refetch, onClose, initialData }) => {
     },
   });
 
-  const isInvalidForm: boolean = isError && error?.response?.status === 400;
-  const errorMessages: string[] = error?.response?.data?.message;
+  const isInvalidForm = error?.response?.status === 400;
+  const errorMessages = error?.response?.data?.message;
 
   const [image, setImage] = useState<string>('');
 

@@ -5,23 +5,13 @@ import Cookies from 'js-cookie';
 import { UseQueryResult } from '@tanstack/react-query';
 
 import { axiosInstance, endpoints } from '@services';
+import { User } from '@model';
 import { useGetData } from '@hooks';
 
 interface AuthContext {
   authData: UseQueryResult<User>;
   handleToken: (arg: string) => void;
   logoutUser: () => void;
-}
-
-interface User {
-  id: number;
-  role: string;
-  creationAt: string;
-  avatar: string;
-  email: string;
-  name: string;
-  password: string;
-  updatedAt: string;
 }
 
 const AuthContext = createContext<AuthContext>({});

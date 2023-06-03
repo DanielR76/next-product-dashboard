@@ -4,11 +4,11 @@ import Link from 'next/link';
 import { LockClosedIcon } from '@heroicons/react/24/solid';
 import { useRouter } from 'next/navigation';
 
-import { User } from 'model';
+import { Login } from 'model';
 import { useAuth, useForm, usePostData } from '@hooks';
 import { endpoints } from '@services';
 
-const user = new User();
+const login = new Login();
 
 interface Token {
   access_token: string;
@@ -18,7 +18,7 @@ interface Token {
 export default function LoginPage() {
   const router = useRouter();
   const { handleToken, authData } = useAuth();
-  const { values, handleChangeInput } = useForm<User>(user);
+  const { values, handleChangeInput } = useForm<Login>(login);
   const { email, password } = values;
 
   const authLogin = usePostData<Token>({

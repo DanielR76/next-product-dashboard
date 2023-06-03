@@ -27,6 +27,7 @@
       "@dashboardComponents": ["components/dashboard"],
       "@productsComponents": ["components/products"],
       "@hooks": ["hooks"],
+      "@model": ["model"],
       "@providers": ["providers"],
       "@services": ["services"],
       "@types": ["types"]

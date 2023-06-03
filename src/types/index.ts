@@ -1,1 +1,2 @@
-export * from './model/product';
+export * from './interfaces/product';
+export * from './interfaces/user';

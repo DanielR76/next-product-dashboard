@@ -4,18 +4,16 @@ import Link from 'next/link';
 import { LockClosedIcon } from '@heroicons/react/24/solid';
 import { useRouter } from 'next/navigation';
 
+import { User } from 'model';
 import { useAuth, useForm, usePostData } from '@hooks';
-import { endpoints } from 'services';
+import { endpoints } from '@services';
 
-interface DataForm {
-  email: string;
-  password: string;
-}
+const user = new User();
 
 export default function LoginPage() {
   const router = useRouter();
   const { handleToken, authData } = useAuth();
-  const { values, handleChangeInput } = useForm<DataForm>({ email: '', password: '' });
+  const { values, handleChangeInput } = useForm<User>(user);
   const { email, password } = values;
 
   const authLogin = usePostData({

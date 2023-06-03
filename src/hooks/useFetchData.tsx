@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { deleteData, getData, setData } from '@services';
+import { ErrorHTTP } from '@types';
 
 interface Query<T> {
   url: string;
@@ -8,7 +9,7 @@ interface Query<T> {
   enabled?: boolean;
   refetchOnWindowFocus?: boolean;
   onSuccess?: (arg: T) => void;
-  onError?: (arg: Response) => void;
+  onError?: (arg: ErrorHTTP) => void;
 }
 
 interface Mutation<T> extends Omit<Query<T>, 'queryKey' | 'enabled' | 'refetchOnWindowFocus'> {}

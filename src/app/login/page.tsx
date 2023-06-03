@@ -10,13 +10,18 @@ import { endpoints } from '@services';
 
 const user = new User();
 
+interface Token {
+  access_token: string;
+  refresh_token: string;
+}
+
 export default function LoginPage() {
   const router = useRouter();
   const { handleToken, authData } = useAuth();
   const { values, handleChangeInput } = useForm<User>(user);
   const { email, password } = values;
 
-  const authLogin = usePostData({
+  const authLogin = usePostData<Token>({
     url: endpoints.auth.login,
     onSuccess: ({ access_token }) => {
       if (access_token) {

@@ -90,7 +90,7 @@ export default function Products() {
                     </th>
 
                     <th scope="col" className="relative px-6 py-3">
-                      <span className="sr-only">Edit</span>
+                      <span className="sr-only">Remove</span>
                     </th>
                   </tr>
                 </thead>

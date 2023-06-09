@@ -16,3 +16,7 @@ export interface Category {
   creationAt?: string;
   updatedAt?: string;
 }
+
+export interface InsertProduct extends Omit<Product, 'id' | 'category' | 'creationAt' | 'updatedAt'> {
+  category: number
+}

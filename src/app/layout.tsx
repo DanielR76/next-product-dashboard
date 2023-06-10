@@ -1,5 +1,5 @@
 import { ProviderTanstack } from '@providers';
-import { Header, Nav } from '@common';
+import { Header } from '@common';
 
 import { ProviderAuth } from '@hooks';
 import '../styles/global.css';
@@ -17,7 +17,6 @@ export default function RootLayout({ children }: ChildrenProps) {
           <ProviderAuth>
             <div className="min-h-full">
               <Header />
-              <Nav />
               <main className="max-w-7xl mx-auto py-6 sm:px-6 xl:px-8">{children}</main>
             </div>
           </ProviderAuth>

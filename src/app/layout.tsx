@@ -2,7 +2,7 @@ import { ProviderTanstack } from '@providers';
 import { Header } from '@common';
 
 import { ProviderAuth } from '@hooks';
-import '../styles/global.css';
+import '../../public/global.css';
 
 export const metadata = {
   title: 'Create Next App',

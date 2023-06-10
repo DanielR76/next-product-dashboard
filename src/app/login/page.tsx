@@ -4,11 +4,12 @@ import Link from 'next/link';
 import { LockClosedIcon } from '@heroicons/react/24/solid';
 import { useRouter } from 'next/navigation';
 
-import { Login } from '@models';
+import { loginModel } from '@models';
 import { useAuth, useForm, usePostData } from '@hooks';
 import { endpoints } from '@services';
+import { Login } from '@types';
 
-const login = new Login();
+const login = loginModel();
 
 interface Token {
   access_token: string;

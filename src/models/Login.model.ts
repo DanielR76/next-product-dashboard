@@ -1,9 +1,6 @@
-export class Login {
-  email: string;
-  password: string;
+import { Login } from "@types";
 
-  constructor(data?: Login) {
-    this.email = data?.email || '';
-    this.password = data?.password || '';
-  }
-}
+export const loginModel = (data?:Partial<Login>): Login => ({
+  email: data?.email || '',
+  password: data?.password || '',
+})

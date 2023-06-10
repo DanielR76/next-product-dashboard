@@ -5,7 +5,7 @@ import Cookies from 'js-cookie';
 import { UseQueryResult } from '@tanstack/react-query';
 
 import { axiosInstance, endpoints } from '@services';
-import { User } from '@models';
+import { User } from '@types';
 import { useGetData } from '@hooks';
 
 interface AuthContext {

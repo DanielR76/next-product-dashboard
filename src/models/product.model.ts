@@ -1,13 +1,16 @@
 import { Product, Category, InsertProduct } from '@types';
 
-const base = ( data?: Product | InsertProduct) => ({
+type PartialProduct = Partial<Product>;
+type PartialInsert = Partial<InsertProduct>;
+
+const base = ( data?: PartialProduct | PartialInsert) => ({
   title: data?.title || '',
   price: data?.price ?? 0,
   description: data?.description || '',
   images: data?.images || [''],
 });
 
-export const productModel = (data?: Product):Product => { 
+export const productModel = (data?: PartialProduct):Product => { 
   const result = base(data);
 
   const category: Category = {
@@ -27,7 +30,7 @@ export const productModel = (data?: Product):Product => {
   };
 };
 
-export const insertProductModel = ( data?: InsertProduct):InsertProduct => {
+export const insertProductModel = ( data?: PartialInsert):InsertProduct => {
   const result = base(data);
   return {
     ...result,

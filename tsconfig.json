@@ -26,11 +26,12 @@
       "@loginComponents": ["components/login"],
       "@dashboardComponents": ["components/dashboard"],
       "@productsComponents": ["components/products"],
+      "@constants": ["constants"],
       "@hooks": ["hooks"],
       "@models": ["models"],
       "@providers": ["providers"],
       "@services": ["services"],
-      "@types": ["types"]
+      "@types": ["types"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

@@ -4,14 +4,10 @@ import Link from 'next/link';
 import { Bars3Icon } from '@heroicons/react/24/outline';
 
 import { useAuth } from '@hooks';
+import { navigation } from '@constants';
 
 export default function Home() {
   const { authData } = useAuth();
-
-  const navigation: Route[] = [
-    { name: 'Dashboard', path: '/dashboard' },
-    { name: 'Product', path: '/dashboard/products' },
-  ];
 
   return (
     <div className="isolate bg-white">

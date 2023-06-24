@@ -1,5 +1,5 @@
 import { ProviderTanstack, ProviderAuth } from '@providers';
-import { Header } from '@common';
+import { Header } from '@organisms';
 
 import '../../public/global.css';
 

@@ -4,7 +4,7 @@ import { useMemo } from 'react';
 
 import { endpoints } from '@services';
 import { useGetData } from '@hooks';
-import { Chart } from '@dashboardComponents';
+import { Chart } from '@molecules';
 import { productModel } from '@models';
 import { Product } from '@types';
 
@@ -21,7 +21,10 @@ export default function Dashboard() {
     url: endpoints.products.getListOfProducts(PRD_LIMIT, PRD_OFFSET),
   });
 
-  const categoryList = useMemo(() => products?.map((product) => productModel(product).category), [products]);
+  const categoryList = useMemo(
+    () => products?.map((product) => productModel(product).category),
+    [products],
+  );
 
   const categoryNames = useMemo(
     () => categoryList?.map((category) => category.name),

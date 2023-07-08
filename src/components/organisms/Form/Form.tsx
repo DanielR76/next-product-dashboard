@@ -1,3 +1,5 @@
+'use client';
+
 import { FC, useState } from 'react';
 import { PhotoIcon } from '@heroicons/react/24/solid';
 

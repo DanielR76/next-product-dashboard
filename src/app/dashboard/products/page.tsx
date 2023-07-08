@@ -6,7 +6,7 @@ import { CheckIcon, TrashIcon, PencilSquareIcon } from '@heroicons/react/20/soli
 
 import { useGetData, useDeleteData } from '@hooks';
 import { endpoints } from '@services';
-import { Modal } from '@productsComponents';
+import { Modal } from '@molecules';
 import { Product } from '@types';
 
 export default function Products() {

@@ -25,7 +25,6 @@
       "@atoms": ["components/atoms"],
       "@molecules": ["components/molecules"],
       "@organisms": ["components/organisms"],
-      "@productsComponents": ["components/products"],
       "@constants": ["constants"],
       "@hooks": ["hooks"],
       "@models": ["models"],

@@ -4,7 +4,7 @@ import { FC, Fragment, useRef } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { XCircleIcon } from '@heroicons/react/24/solid';
 
-import { Form } from './Form';
+import { Form } from 'components/organisms/Form/Form';
 
 interface Modal {
   isOpen: boolean;

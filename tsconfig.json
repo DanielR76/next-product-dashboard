@@ -25,7 +25,6 @@
       "@atoms": ["components/atoms"],
       "@molecules": ["components/molecules"],
       "@organisms": ["components/organisms"],
-      "@common": ["components/common"],
       "@loginComponents": ["components/login"],
       "@dashboardComponents": ["components/dashboard"],
       "@productsComponents": ["components/products"],

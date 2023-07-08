@@ -1,2 +1,2 @@
-export * from './tanstack/Tanstack';
-export * from './auth/Auth';
+export * from './tanstack/Tanstack.provider';
+export * from './auth/Auth.provider';

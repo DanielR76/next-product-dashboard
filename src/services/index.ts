@@ -1,2 +1,2 @@
 export * from './endpoints';
-export * from './instance';
+export * from './intance/instance';

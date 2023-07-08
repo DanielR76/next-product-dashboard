@@ -1,2 +1,2 @@
-export * from './Tanstack';
-export * from './Auth';
+export * from './tanstack/Tanstack';
+export * from './auth/Auth';

@@ -3,6 +3,8 @@
 import { FC, useState } from 'react';
 import { PhotoIcon } from '@heroicons/react/24/solid';
 
+import { Input } from '@molecules';
+
 import { useForm, usePostData } from '@hooks';
 import { endpoints } from '@services';
 import { Product } from '@types';
@@ -69,43 +71,20 @@ export const Form: FC<Form> = ({ refetch, onClose, initialData }) => {
       <div className="space-y-12">
         <div className="border-b border-gray-900/10 pb-12">
           <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-            <div className="sm:col-span-3">
-              <label htmlFor="title" className="block text-sm font-medium leading-6 text-gray-900">
-                Title
-              </label>
+            <Input
+              label="title"
+              defaultValue={initialData?.title}
+              value={title}
+              onChange={handleChangeInput}
+            />
 
-              <div className="mt-2">
-                <input
-                  id="title"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  type="text"
-                  name="title"
-                  defaultValue={initialData?.title}
-                  value={title}
-                  onChange={handleChangeInput}
-                  autoComplete="given-name"
-                />
-              </div>
-            </div>
-
-            <div className="sm:col-span-3">
-              <label htmlFor="price" className="block text-sm font-medium leading-6 text-gray-900">
-                Price
-              </label>
-
-              <div className="mt-2">
-                <input
-                  id="price"
-                  className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  type="text"
-                  name="price"
-                  defaultValue={initialData?.price}
-                  value={price}
-                  onChange={handleChangeInput}
-                  autoComplete="family-name"
-                />
-              </div>
-            </div>
+            <Input
+              label="price"
+              defaultValue={initialData?.price}
+              value={price}
+              onChange={handleChangeInput}
+              type="number"
+            />
 
             <div className="sm:col-span-3">
               <label

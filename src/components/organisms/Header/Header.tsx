@@ -2,13 +2,14 @@
 
 import { Fragment } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 
 import { useAuth } from '@hooks';
-import { Paths } from '@constants';
 import { NavigationItems } from '@molecules';
+import { Paths } from '@constants';
 
 export const Header = () => {
   const pathname = usePathname();
@@ -27,10 +28,12 @@ export const Header = () => {
                 <div className="flex items-center">
                   <div className="flex-shrink-0">
                     <Link href={Paths.Home}>
-                      <img
+                      <Image
                         className="h-8 w-8"
                         src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
                         alt="Workflow"
+                        width={100}
+                        height={100}
                       />
                     </Link>
                   </div>

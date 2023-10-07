@@ -3,22 +3,28 @@
 import { FC, useId } from 'react';
 
 interface InputProps {
+  autoComplete?: string;
   defaultValue?: string | number | undefined;
-  inputtype?: 'text' | 'number';
+  inputtype?: 'text' | 'number' | 'email' | 'password';
   label: string;
   textareaRows?: number;
   type?: 'input' | 'textarea';
   value: string | number;
+  isDisabled?: boolean;
+  required?: boolean;
   onChange: (str: EventInput | EventTextArea) => void;
 }
 
 export const Input: FC<InputProps> = ({
+  autoComplete = 'off',
   defaultValue,
   inputtype = 'text',
   label,
   textareaRows = 3,
   type = 'input',
   value,
+  isDisabled,
+  required,
   onChange,
 }) => {
   const id = useId();
@@ -31,7 +37,9 @@ export const Input: FC<InputProps> = ({
     name: label,
     defaultValue,
     value,
-    autoComplete: 'off',
+    autoComplete,
+    disabled: isDisabled,
+    required,
     onChange,
   };
 

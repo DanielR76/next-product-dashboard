@@ -63,7 +63,11 @@ export const Form: FC<Form> = ({ refetch, onClose, initialData }) => {
       {isInvalidForm && errorMessages && (
         <section className="mt-4 text-red-600">
           {errorMessages?.map((error, index) => (
-            <span key={index}>{error}</span>
+            <ul>
+              <li>
+                <span key={index}>{error}</span>
+              </li>
+            </ul>
           ))}
         </section>
       )}
@@ -160,7 +164,11 @@ export const Form: FC<Form> = ({ refetch, onClose, initialData }) => {
       </div>
 
       <div className="mt-6 flex items-center justify-end gap-x-6">
-        <button type="button" className="text-sm font-semibold leading-6 text-gray-900">
+        <button
+          type="button"
+          className="text-sm font-semibold leading-6 text-gray-900"
+          onClick={() => onClose()}
+        >
           Cancel
         </button>
 

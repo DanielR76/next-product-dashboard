@@ -5,12 +5,11 @@ import { PhotoIcon } from '@heroicons/react/24/solid';
 
 import { Input } from '@molecules';
 
-import { useForm, usePostData } from '@hooks';
+import { useForm, useGetData, useModalForm, usePostData } from '@hooks';
 import { endpoints } from '@services';
 import { Product } from '@types';
 interface Form {
   onClose: () => void;
-  refetch: () => void;
   initialData?: DataForm;
 }
 
@@ -18,7 +17,8 @@ interface DataForm extends Pick<Product, 'title' | 'price' | 'description'> {
   category: number;
 }
 
-export const Form: FC<Form> = ({ refetch, onClose, initialData }) => {
+export const Form: FC<Form> = ({ initialData }) => {
+  const { handleCloseModal } = useModalForm();
   const { values, handleChangeInput } = useForm<DataForm>({
     title: '',
     price: 1,
@@ -27,12 +27,17 @@ export const Form: FC<Form> = ({ refetch, onClose, initialData }) => {
   });
   const { title, price, description, category } = values;
 
+  const { refetch } = useGetData<Product[]>({
+    queryKey: ['list-all-products'],
+    url: endpoints.products.getAllProducts,
+  });
+
   const { mutate, error } = usePostData<Product>({
     url: endpoints.products.addProduct,
     onSuccess(response) {
       if (response?.id) {
         refetch();
-        onClose();
+        handleCloseModal();
       }
     },
   });
@@ -167,7 +172,7 @@ export const Form: FC<Form> = ({ refetch, onClose, initialData }) => {
         <button
           type="button"
           className="text-sm font-semibold leading-6 text-gray-900"
-          onClick={() => onClose()}
+          onClick={() => handleCloseModal()}
         >
           Cancel
         </button>

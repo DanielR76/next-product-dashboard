@@ -1,16 +1,15 @@
 'use client';
 
-import { useState } from 'react';
 import Link from 'next/link';
 import { CheckIcon, TrashIcon, PencilSquareIcon } from '@heroicons/react/20/solid';
 
-import { useGetData, useDeleteData } from '@hooks';
+import { useGetData, useDeleteData, useModalForm } from '@hooks';
 import { endpoints } from '@services';
 import { Modal } from '@molecules';
 import { Product } from '@types';
 
 export default function Products() {
-  const [isModalOpen, setModalOpen] = useState(false);
+  const { handleOpenModal } = useModalForm();
 
   const { data: products, refetch } = useGetData<Product[]>({
     queryKey: ['list-all-products'],
@@ -22,10 +21,6 @@ export default function Products() {
       if (result) refetch();
     },
   });
-
-  const handleCloseModal = () => setModalOpen(false);
-
-  const handleOpenModal = () => setModalOpen(true);
 
   return (
     <>
@@ -151,7 +146,7 @@ export default function Products() {
         </div>
       </div>
 
-      <Modal onClose={handleCloseModal} isOpen={isModalOpen} refetch={refetch} />
+      <Modal />
     </>
   );
 }

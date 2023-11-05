@@ -4,24 +4,25 @@ import { FC, Fragment, useRef } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { XCircleIcon } from '@heroicons/react/24/solid';
 
+import { useModalForm } from '@hooks';
 import { Form } from 'components/organisms/Form/Form';
 
 interface Modal {
   isOpen: boolean;
   onClose: () => void;
-  refetch: any;
 }
 
-export const Modal: FC<Modal> = ({ isOpen, onClose, refetch }) => {
+export const Modal: FC = () => {
+  const { openModal, handleCloseModal } = useModalForm();
   const cancelButtonRef = useRef(null);
 
   return (
-    <Transition.Root show={isOpen} as={Fragment}>
+    <Transition.Root show={openModal} as={Fragment}>
       <Dialog
         as="div"
         className="fixed z-10 inset-0 overflow-y-auto"
         initialFocus={cancelButtonRef}
-        onClose={onClose}
+        onClose={handleCloseModal}
       >
         <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
           <Transition.Child
@@ -35,9 +36,11 @@ export const Modal: FC<Modal> = ({ isOpen, onClose, refetch }) => {
           >
             <Dialog.Overlay className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
           </Transition.Child>
+
           <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">
             &#8203;
           </span>
+
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
@@ -52,13 +55,14 @@ export const Modal: FC<Modal> = ({ isOpen, onClose, refetch }) => {
                 <XCircleIcon
                   className="flex-shrink-0 h-6 w-6 text-gray-400 cursor-pointer"
                   aria-hidden="true"
-                  onClick={onClose}
+                  onClick={handleCloseModal}
                   ref={cancelButtonRef}
                 />
               </div>
+
               <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                 <div className="sm:flex sm:items-start">
-                  <Form refetch={refetch} onClose={onClose} />
+                  <Form onClose={handleCloseModal} />
                 </div>
               </div>
             </div>

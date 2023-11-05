@@ -2,7 +2,6 @@
 
 import { Fragment } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
@@ -26,18 +25,6 @@ export const Header = () => {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="flex items-center justify-between h-16">
                 <div className="flex items-center">
-                  <div className="flex-shrink-0">
-                    <Link href={Paths.Home}>
-                      <Image
-                        className="h-8 w-8"
-                        src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
-                        alt="Workflow"
-                        width={100}
-                        height={100}
-                      />
-                    </Link>
-                  </div>
-
                   {data && (
                     <div className="hidden md:block">
                       <div className="ml-10 flex items-baseline space-x-4">

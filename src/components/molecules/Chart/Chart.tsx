@@ -12,7 +12,7 @@ import { Bar } from 'react-chartjs-2';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-interface Chart {
+interface ChartProps {
   chartData: ChartData;
 }
 
@@ -27,13 +27,13 @@ interface Dataset {
   backgroundColor: string[];
 }
 
-export const Chart: FC<Chart> = memo(({ chartData }) => (
+export const Chart: FC<ChartProps> = memo(({ chartData }) => (
   <Bar
     className="mb-8 bt-2"
     data={chartData}
-    options={{
-      title: { display: true, text: 'Category', fontSize: 20 },
-      legend: { display: true, position: 'right' },
-    }}
+    // options={{
+    //   title: { display: true, text: 'Category', fontSize: 20 },
+    //   legend: { display: true, position: 'right' },
+    // }}
   />
 ));

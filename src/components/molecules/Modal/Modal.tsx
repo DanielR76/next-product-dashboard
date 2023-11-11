@@ -7,11 +7,6 @@ import { XCircleIcon } from '@heroicons/react/24/solid';
 import { useModalForm } from '@hooks';
 import { Form } from 'components/organisms/Form/Form';
 
-interface Modal {
-  isOpen: boolean;
-  onClose: () => void;
-}
-
 export const Modal: FC = () => {
   const { openModal, handleCloseModal } = useModalForm();
   const cancelButtonRef = useRef(null);

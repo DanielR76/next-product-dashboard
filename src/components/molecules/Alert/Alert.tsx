@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { XCircleIcon } from '@heroicons/react/20/solid';
 
 type TypeAlert = 'Warning' | 'Error';
-interface Alert {
+interface AlertProps {
   readonly message: string;
   readonly active: boolean;
   readonly type: TypeAlert;
@@ -10,7 +10,7 @@ interface Alert {
   onClose: () => void;
 }
 
-export const Alert: FC<Alert> = ({
+export const Alert: FC<AlertProps> = ({
   message = '',
   active,
   type = 'Warning',

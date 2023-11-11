@@ -7,6 +7,7 @@ import { useGetData, useDeleteData, useModalForm } from '@hooks';
 import { endpoints } from '@services';
 import { Modal } from '@molecules';
 import { Product } from '@types';
+import { Paths } from '@constants';
 
 export default function Products() {
   const { handleOpenModal } = useModalForm();
@@ -126,7 +127,7 @@ export default function Products() {
                       </td>
 
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <Link href={`/dashboard/products/${product.id}`}>
+                        <Link href={`${Paths.Product}/${product.id}`}>
                           <PencilSquareIcon className="h-5 cursor-pointer text-blue-500" />
                         </Link>
                       </td>

@@ -1,6 +1,10 @@
 // import { Form } from '@productsComponents/Form';
 
-export default function Edit({ params }) {
+interface EditProps {
+  params: { id: string };
+}
+
+export default function Edit({ params }: EditProps) {
   const { id } = params;
 
   return <div>{id}</div>;

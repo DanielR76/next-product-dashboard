@@ -1,8 +1,8 @@
 export enum Paths {
   Home = '/',
-  Login = '/login',
+  Login = '/',
   Dashboard = '/dashboard',
-  Product = '/dashboard/products',
+  Product = '/products',
 }
 
 export const navigation: Route[] = [

@@ -8,7 +8,7 @@ import { Input } from '@molecules';
 import { useForm, useGetData, useModalForm, usePostData } from '@hooks';
 import { endpoints } from '@services';
 import { Product } from '@types';
-interface Form {
+interface FormProps {
   onClose: () => void;
   initialData?: DataForm;
 }
@@ -17,7 +17,7 @@ interface DataForm extends Pick<Product, 'title' | 'price' | 'description'> {
   category: number;
 }
 
-export const Form: FC<Form> = ({ initialData }) => {
+export const Form: FC<FormProps> = ({ initialData }) => {
   const { handleCloseModal } = useModalForm();
   const { values, handleChangeInput } = useForm<DataForm>({
     title: '',

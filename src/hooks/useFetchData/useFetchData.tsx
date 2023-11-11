@@ -31,29 +31,18 @@ export const useGetData = <T extends Object>({
   });
 };
 
-export const usePostData = <T extends Object>({
-  url,
-  onSuccess,
-  onError,
-  ...rest
-}: Mutation<T>) => {
+export const usePostData = <T extends Object>({ url, ...rest }: Mutation<T>) => {
   return useMutation({
+    // @ts-expect-error
     mutationFn: (obj: Object) => setData(url, obj),
-    onSuccess,
-    onError,
     ...rest,
   });
 };
 
-export const useDeleteData = <T extends Object>({
-  onSuccess,
-  onError,
-  ...rest
-}: MutationDelete<T>) => {
+export const useDeleteData = <T extends Object>({ ...rest }: MutationDelete<T>) => {
   return useMutation({
+    // @ts-expect-error
     mutationFn: (urlParam: string) => deleteData(urlParam),
-    onSuccess,
-    onError,
     ...rest,
   });
 };

@@ -1,14 +1,12 @@
-'use client';
-
 import { FC, createContext, useState } from 'react';
 
-interface ModalContextProps {
+export interface ModalContextProps {
   openModal: boolean;
   handleOpenModal: () => void;
   handleCloseModal: () => void;
 }
 
-export const ModalContext = createContext<ModalContextProps>({});
+export const ModalContext = createContext<Partial<ModalContextProps>>({});
 
 export const ProviderModal: FC<ChildrenProps> = ({ children }) => {
   const [openModal, setOpenModal] = useState(false);

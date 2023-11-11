@@ -1,6 +1,6 @@
 'use client';
 
 import { useContext } from 'react';
-import { AuthContext } from '@providers';
+import { AuthContext, AuthContextProps } from '@providers';
 
-export const useAuth = () => useContext(AuthContext);
+export const useAuth = () => useContext(AuthContext) as AuthContextProps;

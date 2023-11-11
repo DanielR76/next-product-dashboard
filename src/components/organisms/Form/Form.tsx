@@ -68,7 +68,7 @@ export const Form: FC<FormProps> = ({ initialData }) => {
       {isInvalidForm && errorMessages && (
         <section className="mt-4 text-red-600">
           {errorMessages?.map((error, index) => (
-            <ul>
+            <ul key={index}>
               <li>
                 <span key={index}>{error}</span>
               </li>

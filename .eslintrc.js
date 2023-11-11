@@ -13,6 +13,9 @@ module.exports = {
     'next/core-web-vitals',
   ],
   rules: {
-    semi: ['error', 'alwals'],
+    semi: ['error', 'always'],
+    'no-undef': 'off',
+    'no-unused-vars': 'off',
+    'react/display-name': 'off',
   },
 };

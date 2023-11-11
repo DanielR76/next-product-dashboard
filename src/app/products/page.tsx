@@ -100,7 +100,7 @@ export default function Products() {
                             <img
                               className="h-10 w-10 rounded-full"
                               src={product?.images?.[0]}
-                              alt="image-avatar"
+                              alt="avatar"
                             />
                           </div>
 

@@ -1,4 +1,4 @@
-import { User } from "@types";
+import { User } from '@types';
 
 export const userModel = (data?: Partial<User>): User => ({
   id: data?.id || 0,
@@ -9,4 +9,4 @@ export const userModel = (data?: Partial<User>): User => ({
   name: data?.name || '',
   password: data?.password || '',
   updatedAt: data?.updatedAt || '',
-})
+});

@@ -1,34 +1,24 @@
 'use client';
 
-import { mergeClasses } from '@utils';
 import React, { FC, useId } from 'react';
+import { mergeClasses } from '@utils';
 
-interface InputProps extends AttrInputTexArea {
-  autoComplete?: string;
-  defaultValue?: string | number | undefined;
-  inputtype?: 'text' | 'number' | 'email' | 'password';
-  isDisabled?: boolean;
+interface InputProps {
+  inputType?: 'input' | 'textarea';
   label: string;
-  required?: boolean;
-  textareaRows?: number;
-  type?: 'input' | 'textarea';
-  value: string | number;
-  onChange: (str: EventInput | EventTextArea) => void;
+  attrInput?: InputField;
+  attrTextarea?: TextareaField;
 }
 
-export const Input: FC<InputProps> = ({
-  autoComplete = 'off',
-  className,
-  defaultValue,
-  inputtype = 'text',
-  isDisabled,
-  label,
-  required,
-  textareaRows = 3,
-  type = 'input',
-  value,
-  onChange,
-}) => {
+interface InputField extends AttrInput {
+  value: string | number;
+}
+
+interface TextareaField extends AttrTextArea {
+  value: string | number;
+}
+
+export const Input: FC<InputProps> = ({ label, inputType = 'input', attrInput, attrTextarea }) => {
   const id = `${label}-${useId()}`;
 
   const defaultClassName = `
@@ -39,18 +29,6 @@ export const Input: FC<InputProps> = ({
     focus:(ring-2 ring-inset ring-indigo-600) 
     focus:sm:text-sm sm:leading-6`;
 
-  const props = {
-    id,
-    name: label,
-    defaultValue,
-    value,
-    autoComplete,
-    disabled: isDisabled,
-    required,
-    className: mergeClasses(defaultClassName, className),
-    onChange,
-  };
-
   return (
     <>
       <div className="sm:col-span-3">
@@ -59,9 +37,21 @@ export const Input: FC<InputProps> = ({
         </label>
 
         <div className="mt-2">
-          {type === 'input' && <input {...props} type={inputtype} />}
+          {inputType === 'input' && (
+            <input
+              name={label}
+              className={mergeClasses(defaultClassName, attrInput?.className)}
+              {...attrInput}
+            />
+          )}
 
-          {type === 'textarea' && <textarea {...props} rows={textareaRows} />}
+          {inputType === 'textarea' && (
+            <textarea
+              name={label}
+              className={mergeClasses(defaultClassName, attrTextarea?.className)}
+              {...attrTextarea}
+            />
+          )}
         </div>
       </div>
     </>

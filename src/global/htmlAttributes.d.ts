@@ -1,3 +1,3 @@
-type AttrInput = React.HTMLAttributes<HTMLInputElement>;
-type AttrTextArea = React.HTMLAttributes<HTMLTextAreaElement>;
-type AttrInputTexArea = React.HTMLAttributes<HTMLInputElement | HTMLTextAreaElement>;
+type AttrInput = React.InputHTMLAttributes<HTMLInputElement>;
+type AttrTextArea = React.TextareaHTMLAttributes<HTMLTextAreaElement>;
+type AttrButton = React.ButtonHTMLAttributes<HTMLButtonElement>;

@@ -1,9 +1,8 @@
 'use client';
 
-import { LockClosedIcon } from '@heroicons/react/24/solid';
 import { useRouter } from 'next/navigation';
 
-import { Input } from '@molecules';
+import { Button, Input } from '@molecules';
 
 import { loginModel } from '@models';
 import { useAuth, useForm, usePostData } from '@hooks';
@@ -74,40 +73,34 @@ export default function LoginPage() {
           <form className="mt-4 space-y-6" action="#" method="POST" onSubmit={handleSubmit}>
             <div className="rounded-md shadow-sm -space-y-px">
               <Input
-                label="email"
-                value={email}
-                inputtype="email"
-                onChange={handleChangeInput}
-                isDisabled={authLogin.isLoading}
-                autoComplete="email"
-                required
+                label="Email"
+                attrInput={{
+                  value: email,
+                  name: 'email',
+                  type: 'email',
+                  onChange: handleChangeInput,
+                  disabled: authLogin.isLoading,
+                  autoComplete: 'email',
+                  required: true,
+                }}
               />
 
               <Input
-                label="password"
-                value={password}
-                inputtype="password"
-                onChange={handleChangeInput}
-                isDisabled={authLogin.isLoading}
-                autoComplete="password"
-                required
+                label="Password"
+                attrInput={{
+                  value: password,
+                  name: 'password',
+                  type: 'password',
+                  onChange: handleChangeInput,
+                  disabled: authLogin.isLoading,
+                  autoComplete: 'password',
+                  required: true,
+                }}
               />
             </div>
 
             <div>
-              <button
-                disabled={authLogin.isLoading}
-                type="submit"
-                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-              >
-                <span className="absolute left-0 inset-y-0 flex items-center pl-3">
-                  <LockClosedIcon
-                    className="h-5 w-5 text-indigo-500 group-hover:text-indigo-400"
-                    aria-hidden="true"
-                  />
-                </span>
-                Sign in
-              </button>
+              <Button value="Sign in" />
             </div>
           </form>
         </div>

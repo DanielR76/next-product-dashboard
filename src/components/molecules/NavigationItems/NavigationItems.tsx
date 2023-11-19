@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 import { navigation } from '@constants';
-import { classNames } from '@utils';
+import { mergeClasses } from '@utils';
 
 export const NavigationItems = () => {
   return (
@@ -10,11 +10,10 @@ export const NavigationItems = () => {
         <Link
           key={item.name}
           href={item.path}
-          className={classNames(
-            item.isCurrent
-              ? 'bg-gray-900 text-white'
-              : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+          className={mergeClasses(
             'px-3 py-2 rounded-md text-sm font-medium',
+            { 'bg-gray-900 text-white': item.isCurrent },
+            { 'text-gray-300 hover:bg-gray-700 hover:text-white': !item.isCurrent },
           )}
           aria-current={item.isCurrent ? 'page' : undefined}
         >

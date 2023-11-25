@@ -28,12 +28,5 @@ interface Dataset {
 }
 
 export const Chart: FC<ChartProps> = memo(({ chartData }) => (
-  <Bar
-    className="mb-8 bt-2"
-    data={chartData}
-    // options={{
-    //   title: { display: true, text: 'Category', fontSize: 20 },
-    //   legend: { display: true, position: 'right' },
-    // }}
-  />
+  <Bar className="mb-8 bt-2" data={chartData} />
 ));

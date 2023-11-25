@@ -4,6 +4,7 @@ import Cookies from 'js-cookie';
 import { axiosInstance, endpoints } from '@services';
 import { useGetData } from '@hooks';
 import { User } from '@types';
+import { Paths } from '@constants';
 
 export const useFetchAuth = () => {
   const [token, setToken] = useState('');
@@ -24,7 +25,7 @@ export const useFetchAuth = () => {
     setToken('');
     Cookies.remove('token');
     delete axiosInstance.defaults.headers.common.Authorization;
-    window.location.href = '/login';
+    window.location.href = Paths.Home;
   };
 
   return { authData, handleToken, logoutUser };

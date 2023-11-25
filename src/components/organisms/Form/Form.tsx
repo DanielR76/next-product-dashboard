@@ -180,15 +180,14 @@ export const Form: FC<FormProps> = ({ initialData }) => {
       </div>
 
       <div className="mt-6 flex items-center justify-end gap-x-6">
-        <button
+        <Button
+          className="w-32 bg-gray-800 hover:bg-purple-600"
           type="button"
-          className="text-sm font-semibold leading-6 text-gray-900"
+          value="Cancel"
           onClick={() => handleCloseModal()}
-        >
-          Cancel
-        </button>
+        />
 
-        <Button className="w-32" value="Save" />
+        <Button className="w-32" type="submit" value="Save" />
       </div>
     </form>
   );

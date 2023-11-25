@@ -1,4 +1,10 @@
-export const Loading = () => {
+import { FC } from 'react';
+
+interface LoadingProps {
+  value?: string;
+}
+
+export const Loading: FC<LoadingProps> = ({ value }) => {
   return (
     <div className="flex items-center justify-center w-full h-full pt-96">
       <div className="flex justify-center items-center space-x-1 text-sm text-gray-700">
@@ -15,7 +21,7 @@ export const Loading = () => {
             fillRule="evenodd"
           />
         </svg>
-        <div>Loading ...</div>
+        <div>Loading {value}...</div>
       </div>
     </div>
   );

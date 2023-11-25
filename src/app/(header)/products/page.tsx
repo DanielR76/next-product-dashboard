@@ -1,11 +1,12 @@
 'use client';
 
 import Link from 'next/link';
-import { CheckIcon, TrashIcon, PencilSquareIcon } from '@heroicons/react/20/solid';
+import Image from 'next/image';
+import { TrashIcon, PencilSquareIcon } from '@heroicons/react/20/solid';
 
 import { useGetData, useDeleteData, useModalForm } from '@hooks';
 import { endpoints } from '@services';
-import { Modal } from '@molecules';
+import { Button, Modal } from '@molecules';
 import { Product } from '@types';
 import { Paths } from '@constants';
 
@@ -34,14 +35,7 @@ export default function Products() {
 
         <div className="mt-5 flex lg:ml-4 lg:mt-0">
           <span className="sm:ml-3">
-            <button
-              onClick={handleOpenModal}
-              type="button"
-              className="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-            >
-              <CheckIcon className="-ml-0.5 mr-1.5 h-5 w-5" aria-hidden="true" />
-              Add product
-            </button>
+            <Button value="Add product" onClick={handleOpenModal} />
           </span>
         </div>
       </div>
@@ -97,10 +91,12 @@ export default function Products() {
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="flex items-center">
                           <div className="flex-shrink-0 h-10 w-10">
-                            <img
+                            <Image
                               className="h-10 w-10 rounded-full"
                               src={product?.images?.[0]}
                               alt="avatar"
+                              width={20}
+                              height={20}
                             />
                           </div>
 

@@ -12,11 +12,7 @@ const PRD_LIMIT = 5;
 const PRD_OFFSET = 5;
 
 export default function Dashboard() {
-  const {
-    data: products,
-    isFetching,
-    isLoading,
-  } = useGetData<Product[]>({
+  const { data: products } = useGetData<Product[]>({
     queryKey: ['list-products'],
     url: endpoints.products.getListOfProducts(PRD_LIMIT, PRD_OFFSET),
   });
@@ -47,8 +43,6 @@ export default function Dashboard() {
       },
     ],
   };
-
-  if (isFetching || isLoading) return <span>Loading...</span>;
 
   return (
     <>

@@ -2,7 +2,6 @@
 
 import { Fragment } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
@@ -10,6 +9,7 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { useAuth } from '@hooks';
 import { NavigationItems } from '@molecules';
 import { Paths } from '@constants';
+import Image from 'next/image';
 
 export const Header = () => {
   const pathname = usePathname();

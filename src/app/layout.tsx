@@ -1,5 +1,4 @@
 import { ProviderTanstack, ProviderAuth } from '@providers';
-import { Header } from '@organisms';
 
 import '../../public/global.css';
 
@@ -11,14 +10,9 @@ export const metadata = {
 export default function RootLayout({ children }: ChildrenProps) {
   return (
     <html lang="en">
-      <body>
+      <body className="overflow-hidden">
         <ProviderTanstack>
-          <ProviderAuth>
-            <div className="min-h-full">
-              <Header />
-              <main className="max-w-7xl mx-auto py-6 sm:px-6 xl:px-8">{children}</main>
-            </div>
-          </ProviderAuth>
+          <ProviderAuth>{children}</ProviderAuth>
         </ProviderTanstack>
       </body>
     </html>
